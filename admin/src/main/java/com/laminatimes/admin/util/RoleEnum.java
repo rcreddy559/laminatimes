@@ -3,6 +3,7 @@ package com.laminatimes.admin.util;
 public enum RoleEnum {
 
 	ADMIN("ADMIN"), USER("USER");
+	//add
 
 	private String role;
 
