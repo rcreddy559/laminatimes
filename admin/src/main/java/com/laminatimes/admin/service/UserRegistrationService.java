@@ -67,8 +67,7 @@ public class UserRegistrationService {
 			usrRole.setUserId(id);
 			userRoleRepo.save(usrRole);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+					e.printStackTrace();
 		}
 
 		return user;
@@ -81,9 +80,9 @@ public class UserRegistrationService {
 	private User setRole(UserRegRequest userReg, com.laminatimes.admin.entity.User user) {
 		RoleEnum roleEn = null;
 		if (userReg.getRoleId().equalsIgnoreCase("ADMIN")) {
-			roleEn = RoleEnum.ROLE_ADMIN;
+			roleEn = RoleEnum.ADMIN;
 		} else if (userReg.getRoleId().equalsIgnoreCase("USER")) {
-			roleEn = RoleEnum.ROLE_USER;
+			roleEn = RoleEnum.USER;
 		}
 		HashSet<Role> roles = new HashSet<Role>();
 
@@ -128,8 +127,7 @@ public class UserRegistrationService {
 				System.out.println(regRequest.toString());
 
 			} catch (IllegalAccessException | InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+					e.printStackTrace();
 			}
 		}
 
@@ -143,7 +141,6 @@ public class UserRegistrationService {
 			User User = null;
 			if (UserOptional.isPresent()) {
 				User = usrRepo.getOne(UserOptional.get().getId());
-				// User = UserOptional.get();
 				User.setAboutUser(userRegProfile.getAboutUser() != null ? userRegProfile.getAboutUser() : "");
 				User.setActiv(userRegProfile.getActive());
 				User.setAddress(userRegProfile.getAddress() != null ? userRegProfile.getAddress() : "");
@@ -195,17 +192,14 @@ public class UserRegistrationService {
 						User.getCity(), User.getTaxId(), User.getSkills(), User.getActive(), User.getGender(),
 						User.getBirthDay());
 
-				// usrRepo.save(User);
 				try {
 					BeanUtils.copyProperties(userRegProfile, User);
 				} catch (IllegalAccessException | InvocationTargetException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+						e.printStackTrace();
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				e.printStackTrace();
 		}
 
 		return userRegProfile;

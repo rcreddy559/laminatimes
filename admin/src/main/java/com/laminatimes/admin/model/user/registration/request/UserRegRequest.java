@@ -303,7 +303,7 @@ public class UserRegRequest {
 	}
 
 	public void setActive(int activ) {
-		this.active = active;
+		this.active = activ;
 	}
 
 }
