@@ -1,5 +1,8 @@
 package com.laminatimes.admin;
 
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,10 +16,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.laminatimes.admin.repository.RoleRepository;
 import com.laminatimes.admin.repository.UserRepository;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 @EnableJpaRepositories(basePackageClasses = { UserRepository.class , RoleRepository.class})
 @Configuration
@@ -27,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	DataSource dataSource;
 
 	@Autowired
+	@Qualifier("customUserDetailsService")
 	UserDetailsService userDetailsService;
 
 	@Bean
@@ -45,10 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder(12);
-	}
+	AlwaysSendUnauthorized401AuthenticationEntryPoint alwaysSendUnauthorized401AuthenticationEntryPoint = new AlwaysSendUnauthorized401AuthenticationEntryPoint();
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -65,4 +68,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
 	}
 
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder(12);
+	}
+
+	public class AlwaysSendUnauthorized401AuthenticationEntryPoint implements AuthenticationEntryPoint {
+		@Override
+		public final void commence(HttpServletRequest request, HttpServletResponse response,
+				AuthenticationException authException) throws IOException {
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		}
+
+	}
 }
