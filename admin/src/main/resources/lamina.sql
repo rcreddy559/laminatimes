@@ -270,9 +270,6 @@ CREATE TABLE `holidays` (
   CONSTRAINT `holidays_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `user` (`id`)
 )
 
-
-
-
 insert into lamina.role(role_name) values ('ADMIN');
 insert into lamina.role(role_name) values ('USER');
 
