@@ -86,6 +86,8 @@ public class UserRegistrationService {
 		}
 		HashSet<Role> roles = new HashSet<Role>();
         //test comment
+		List<Role> roleList = roleRepo.findAll();
+
 		Role role = roleRepo.findByRole(roleEn.toString());
 		roles.add(role);
 		user.setRoles(roles);

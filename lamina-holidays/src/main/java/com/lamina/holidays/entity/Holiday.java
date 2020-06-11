@@ -1,7 +1,6 @@
 package com.lamina.holidays.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Holiday {
     private int id;
@@ -10,7 +9,10 @@ public class Holiday {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public Holiday(int id, String name, String description,LocalDate startDate,LocalDate endDate) {
+    public Holiday() {
+    }
+
+    public Holiday(int id, String name, String description, LocalDate startDate, LocalDate endDate) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -42,7 +44,7 @@ public class Holiday {
         this.description = description;
     }
 
-    public LocalDate  getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
@@ -56,5 +58,16 @@ public class Holiday {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Holiday {" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
     }
 }
