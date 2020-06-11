@@ -2,8 +2,14 @@ package com.laminatimes.admin.repository;
 
 import java.util.Date;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import com.laminatimes.admin.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -50,6 +56,14 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	    		 String clientName,  String city,
 	    		 String taxId,  String skills,
 	    		 int active,  String GENDAR,
-	    		 String birthDay);		
+	    		 String birthDay);	
+	 /*
+	 
+	 @Modifying
+	    @Transactional
+	    @Query("update User user set user.name=:name, user.email=:email, user.mobile=:mobile where user.id=:id")
+	    void updateUser(@Param("name") String name, @Param("email") String email,
+	                    @Param("mobile") String mobile, @Param("id") Integer id);
+	                    */
 	    	
 }
