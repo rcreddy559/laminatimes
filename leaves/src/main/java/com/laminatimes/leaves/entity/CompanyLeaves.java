@@ -1,5 +1,7 @@
 package com.laminatimes.leaves.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +21,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "company_leaves")
 
-public class CompanyLeaves {
+public class CompanyLeaves implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public CompanyLeaves(){}
 	
 	@Id

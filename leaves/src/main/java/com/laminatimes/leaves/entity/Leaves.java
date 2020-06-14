@@ -1,5 +1,7 @@
 package com.laminatimes.leaves.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,12 +16,21 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
 @Table(name = "leaves")
 
-public class Leaves {
+public class Leaves implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+
+
 	public Leaves(){}
 	
 	@Id
@@ -57,14 +68,14 @@ public class Leaves {
 	@Column(name = "modified_date")
 	private java.time.LocalDate  modifiedDate;
 	
-	
+	 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "employee_id", nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private User employeeUser;
 	
-	
+	 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "approver_id",   referencedColumnName = "manager_id",nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)

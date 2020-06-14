@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "1064d814-c335-4844-953a-62f293ba5a9e",
+		"name": "laminatimes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "leave post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"leaveName\": \"test leave\",\r\n  \"startDate\":\"\",\r\n  \"endDate\": \"\",\r\n  \"comments\":\"test\",\r\n  \"createdBy\":\"sravan\",\r\n  \"employeeId\":8\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8086/leaves",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"leaves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllLeaves",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/leaves",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"leaves"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getLeaveByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/leaves/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"leaves",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Leaves by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8086/leaves/12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"leaves",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Leaves",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"leaveName\": \"test leave4\",\r\n  \"startDate\":\"\",\r\n  \"endDate\": \"\",\r\n  \"comments\":\"test\",\r\n  \"createdBy\":\"sravan\",\r\n  \"employeeId\":8\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8086/leaves/13",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"leaves",
+						"13"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
