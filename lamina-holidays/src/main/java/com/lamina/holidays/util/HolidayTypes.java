@@ -1,0 +1,16 @@
+package com.lamina.holidays.util;
+
+public enum HolidayTypes {
+    CHRISTMS_DAY,
+    FATHERS_DAY,
+    EASTER_DAY,
+    HALLOWEEN_DAY,
+    INTERNATIONAL_WOMENS_DAY,
+    MOTHERS_DAY,
+    LABOR_DAY,
+    NEWYEAR_DAY,
+    THANKSGIVING_DAY,
+    SUMMER_VACATION_DAY,
+    VALENTINES_DAY,
+    INTERNATIONAL_CHILDRENS_DAY,
+}
