@@ -1,8 +1,16 @@
 package com.lamina.holidays.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
+@Entity
 public class Holiday {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String description;
@@ -19,6 +27,7 @@ public class Holiday {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
 
     public int getId() {
         return id;

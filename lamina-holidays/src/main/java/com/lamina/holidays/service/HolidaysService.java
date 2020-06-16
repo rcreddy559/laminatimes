@@ -1,79 +1,64 @@
 package com.lamina.holidays.service;
 
 import com.lamina.holidays.entity.Holiday;
+import com.lamina.holidays.exception.HolidaysNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class HolidaysService {
-    Set<Holiday> holidays = new HashSet<>();
 
-    HolidaysService() {
-        holidays.add(new Holiday(1, "New Year", "New year holiday", LocalDate.of(2019, Month.APRIL, 20), LocalDate.of(2019, Month.APRIL, 30)));
-        holidays.add(new Holiday(2, "Three Kings", "New year holiday", LocalDate.of(2019, Month.APRIL, 20), LocalDate.of(2019, Month.JULY, 30)));
-        holidays.add(new Holiday(3, "Fasching", "New year holiday", LocalDate.of(2019, Month.APRIL, 20), LocalDate.of(2019, Month.JANUARY, 30)));
-        holidays.add(new Holiday(4, "Good Friday", "New year holiday", LocalDate.of(2019, Month.APRIL, 20), LocalDate.of(2019, Month.MARCH, 30)));
-        holidays.add(new Holiday(5, "Easter Monday", "New year holiday", LocalDate.of(2019, Month.APRIL, 20), LocalDate.of(2019, Month.APRIL, 30)));
-        holidays.add(new Holiday(6, "Labour Day", "New year holiday", LocalDate.of(2019, Month.APRIL, 20), LocalDate.of(2019, Month.DECEMBER, 30)));
-        holidays.add(new Holiday(7, "Labour Day", "New year holiday", LocalDate.of(2017, Month.APRIL, 20), LocalDate.of(2017, Month.DECEMBER, 30)));
-        holidays.add(new Holiday(8, "Labour Day", "New year holiday", LocalDate.of(2018, Month.APRIL, 20), LocalDate.of(2018, Month.DECEMBER, 30)));
-        holidays.add(new Holiday(9, "Labour Day", "New year holiday", LocalDate.of(2020, Month.APRIL, 20), LocalDate.of(2020, Month.DECEMBER, 30)));
+    @Autowired
+    HolidaysRepository repository;
+
+    public Holiday save(Holiday holiday) {
+        return repository.save(holiday);
     }
 
-    public Set<Holiday> getHolidays() {
-        return holidays;
+    public List<Holiday> getHolidays() {
+        return repository.findAll();
     }
 
     public Holiday get(int id) {
-        return holidays.stream().filter(h -> h.getId() == id).findFirst().orElse(null);
+        return repository.findById(id).orElseThrow(() -> new HolidaysNotFoundException("No Holiday with name: " + id));
     }
 
-    public Set<Holiday> get(String name) {
-        String n = name.toLowerCase();
-        return holidays.stream().filter(h -> h.getName().toLowerCase()
-                .contains(n)).collect(Collectors.toSet());
+    public List<Holiday> get(String name) {
+        System.out.println(repository.findByName(name));
+        return repository.findByName(name)
+                .orElseThrow(() -> new HolidaysNotFoundException("No Holiday with name: " + name));
     }
 
-    public Set<Holiday> getByYear(int year) {
-        return holidays.stream().filter(h -> h.getStartDate().getYear() == year)
-                .collect(Collectors.toSet());
+    public List<Holiday> getByYear(int year) {
+        return repository.findAll().stream()
+                .filter(holiday -> holiday.getStartDate().getYear() == year).collect(Collectors.toList());
     }
 
-    public Holiday create(Holiday holiday) {
-        Comparator<Holiday> comparator = Comparator.comparing(Holiday::getId);
-        Optional<Holiday> maxHoliday = holidays.stream().max(comparator);
-        holiday.setId(maxHoliday.map(value -> value.getId() + 1).orElse(1));
-        holidays.add(holiday);
-        return holiday;
+
+    public void delete(int id) {
+        repository.delete(repository.findById(id)
+                .orElseThrow(() -> new HolidaysNotFoundException("No holiday with id:" + id)));
     }
 
-    public Holiday update(Holiday holiday) {
-        Optional<Holiday> optional = holidays.stream().filter(h -> holiday.getId() == h.getId()).findFirst().map(h -> {
-            h.setDescription(holiday.getDescription());
-            h.setName(holiday.getName());
-            h.setEndDate(holiday.getEndDate());
-            h.setStartDate(holiday.getStartDate());
-            return h;
-        });
-        return optional.orElse(null);
+    public List<Holiday> sortByName() {
+        return repository.findAll().stream().sorted(Comparator.comparing(Holiday::getName)).collect(Collectors.toList());
     }
 
-    public Holiday delete(int id) throws Exception {
-        Optional<Holiday> optional = holidays.stream().filter(h->h.getId() == id).findFirst();
-        if(optional.isPresent()) {
-            System.out.println(holidays.size());
-            holidays.remove(optional.get());
-            System.out.println(holidays.size());
-        } else {
-            throw new Exception("No Holiday found with id: "+id);
-        }
-        return optional.orElse(null);
+    public List<Holiday> sortByYear() {
+        return repository.findAll().stream().sorted(Comparator.comparing(Holiday::getStartDate)).collect(Collectors.toList());
     }
 }
+
+class HolidaysComparator implements Comparator<Holiday> {
+
+    @Override
+    public int compare(Holiday o1, Holiday o2) {
+        return o1.getName().compareTo(o2.getName());
+    }
+}
+
+//protobuf

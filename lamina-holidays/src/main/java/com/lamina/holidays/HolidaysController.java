@@ -5,7 +5,7 @@ import com.lamina.holidays.service.HolidaysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("/holidays")
@@ -14,8 +14,18 @@ public class HolidaysController {
     @Autowired
     HolidaysService service;
 
+    @PostMapping
+    public Holiday create(@RequestBody Holiday holiday) {
+        return service.save(holiday);
+    }
+
+    @PutMapping
+    public Holiday update(@RequestBody Holiday holiday) {
+        return service.save(holiday);
+    }
+
     @GetMapping
-    public Set<Holiday> getHolidays() {
+    public List<Holiday> getHolidays() {
         return service.getHolidays();
     }
 
@@ -25,28 +35,21 @@ public class HolidaysController {
     }
 
     @GetMapping("/name/{name}")
-    public Set<Holiday> getHolidayByName(@PathVariable String name) {
+    public List<Holiday> getHolidayByName(@PathVariable String name) {
         return service.get(name);
     }
 
     @GetMapping("/year/{year}")
-    public Set<Holiday> getHolidayByDates(@PathVariable Integer year) {
+    public List<Holiday> getHolidayByDates(@PathVariable Integer year) {
         return service.getByYear(year);
     }
 
-    @PostMapping()
-    public Holiday create(@RequestBody Holiday holiday) {
-        return service.create(holiday);
-    }
-
-    @PutMapping
-    public Holiday update(@RequestBody Holiday holiday) {
-        return service.update(holiday);
-    }
-
     @DeleteMapping("/id/{id}")
-    public Holiday delete(@PathVariable int id) throws Exception {
-        return service.delete(id);
-    }
+    public void delete(@PathVariable int id) { service.delete(id); }
 
+    @GetMapping("/sort/name")
+    public List<Holiday> sortByName() { return service.sortByName(); }
+
+    @GetMapping("/sort/year")
+    public List<Holiday> sortByYear() { return service.sortByYear(); }
 }
