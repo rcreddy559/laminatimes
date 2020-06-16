@@ -7,6 +7,7 @@ import com.laminatimes.timesheet.service.TimeSheetService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,6 +23,21 @@ import java.util.stream.Collectors;
 public class TimeSheetController {
 
     final String PROJECT_URL = "http://PROJECTS/projects/";
+
+    @Value("${spring.application.name}")
+    private String applicationName;
+
+    @Value("${spring.env.prod: default value }")
+    private String defaultValue;
+
+    @Value("This is static value")
+    private String staticValue;
+
+    @Value("#{${sping.map.dbvalues}}")
+    private Map<String, String> dbValues;
+
+    @Autowired
+    private DBDetails dbDetails;
 
     @Autowired
     private TimeSheetService service;
@@ -36,6 +53,12 @@ public class TimeSheetController {
 
     @GetMapping
     public List<TimeSheetEntity> getAll() {
+        System.out.println("applicationName: "+applicationName);
+        System.out.println("defaultValue: "+defaultValue);
+        System.out.println("staticValue: "+staticValue);
+        System.out.println("dbValues:"+dbValues);
+        System.out.println(dbDetails.toString());
+
         List<TimeSheetEntity> entities = service.getAll();
          return entities.stream().peek(e-> e.setTimeSheetProjects(e.getTimeSheetProjects().stream().peek(p->{
              Project ptemp = getProject(p.getProjectId());
