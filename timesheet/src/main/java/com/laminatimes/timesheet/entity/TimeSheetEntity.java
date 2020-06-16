@@ -2,23 +2,17 @@ package com.laminatimes.timesheet.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class TimeSheet {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class TimeSheetEntity {
+
     private Long id;
     private Long userId;
-
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    private List<TimeSheetProject> timeSheetProjects = new ArrayList<>();
+    private List<TimeSheetProjectEntity> timeSheetProjects = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -44,17 +38,17 @@ public class TimeSheet {
         this.date = date;
     }
 
-    public List<TimeSheetProject> getTimeSheetProjects() {
+    public List<TimeSheetProjectEntity> getTimeSheetProjects() {
         return timeSheetProjects;
     }
 
-    public void setTimeSheetProjects(List<TimeSheetProject> timeSheetProjects) {
+    public void setTimeSheetProjects(List<TimeSheetProjectEntity> timeSheetProjects) {
         this.timeSheetProjects = timeSheetProjects;
     }
 
     @Override
     public String toString() {
-        return "TimeSheet{" +
+        return "TimeSheetEntity{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", date=" + date +
