@@ -11,17 +11,28 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.laminatimes.admin.repository.RoleRepository;
 import com.laminatimes.admin.repository.UserRepository;
+import com.laminatimes.filter.JwtRequestFilter;
+
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @EnableJpaRepositories(basePackageClasses = { UserRepository.class , RoleRepository.class})
 @Configuration
@@ -35,6 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Qualifier("customUserDetailsService")
 	UserDetailsService userDetailsService;
 
+	@Autowired
+	private JwtRequestFilter jwtRequestFilter;
+	
 	@Bean
 	public UserDetailsService userDetailsService() {
 		return super.userDetailsService();
@@ -45,6 +59,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
+	
+	
+	
+
 
 	@Autowired
 	public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -54,12 +72,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	AlwaysSendUnauthorized401AuthenticationEntryPoint alwaysSendUnauthorized401AuthenticationEntryPoint = new AlwaysSendUnauthorized401AuthenticationEntryPoint();
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-
+	protected void configure(HttpSecurity httpSecurity) throws Exception {
+/*
 		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/user").permitAll()
 				.antMatchers(HttpMethod.PUT, "/user").permitAll().antMatchers(HttpMethod.DELETE, "/user/*").permitAll()
 				.antMatchers(HttpMethod.GET, "/user/*").permitAll().antMatchers(HttpMethod.POST, "/login").permitAll()
-				.antMatchers(HttpMethod.POST, "/newuser/*").permitAll();
+				.antMatchers(HttpMethod.POST, "/newuser/*").permitAll();*/
+		httpSecurity.csrf().disable()
+		.authorizeRequests().antMatchers(HttpMethod.POST,"/authenticate").permitAll().antMatchers(HttpMethod.POST, "/user").permitAll().
+				anyRequest().authenticated().and().
+				exceptionHandling().and().sessionManagement()
+		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
 	}
 

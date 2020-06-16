@@ -19,6 +19,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,17 +29,50 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.laminatimes.admin.entity.Role;
 import com.laminatimes.admin.exception.handle.UserNotFoundRuntimeException;
+import com.laminatimes.admin.model.login.request.AuthenticationRequest;
 import com.laminatimes.admin.model.login.request.LoginRequest;
+import com.laminatimes.admin.model.login.response.AuthenticationResponse;
 import com.laminatimes.admin.model.login.response.LoginResponse;
+import com.laminatimes.admin.service.CustomUserDetailsService;
+import com.laminatimes.admin.util.JwtUtil;
 import com.laminatimes.admin.util.RoleEnum;
 
 @RestController
 public class LoginAuthController {
 
-@Autowired
-private AuthenticationManager authenticationManager;
+	@Autowired
+	private AuthenticationManager authenticationManager;
+
+	@Autowired
+	private JwtUtil jwtTokenUtil;
+	
+	@Autowired
+	private CustomUserDetailsService userDetailsService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginAuthController.class);
+    
+	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+
+		try {
+			authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
+			);
+		}
+		catch (BadCredentialsException e) {
+			throw new Exception("Incorrect username or password", e);
+		}
+
+
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+
+		final String jwt = jwtTokenUtil.generateToken(userDetails);
+
+		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+	}
+
+    
+    
    	@CrossOrigin
     @PostMapping(value={"/login"},  consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
