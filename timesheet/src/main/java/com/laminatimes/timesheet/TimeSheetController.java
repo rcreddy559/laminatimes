@@ -4,6 +4,7 @@ import com.laminatimes.timesheet.entity.*;
 import com.laminatimes.timesheet.exception.TimeSheetException;
 import com.laminatimes.timesheet.service.TimeSheetProjectService;
 import com.laminatimes.timesheet.service.TimeSheetService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/timesheet")
 public class TimeSheetController {
 
-    final String PROJECT_URL = "http://projects/projects/";
+    final String PROJECT_URL = "http://PROJECTS/projects/";
 
     @Autowired
     private TimeSheetService service;
@@ -36,15 +37,11 @@ public class TimeSheetController {
     @GetMapping
     public List<TimeSheetEntity> getAll() {
         List<TimeSheetEntity> entities = service.getAll();
-         return entities.stream().map(e->{
-            e.setTimeSheetProjects(e.getTimeSheetProjects().stream().map(p->{
-                Project ptemp = getProject(p.getProjectId());
-                p.setDescription(ptemp.getDescription());
-                p.setName(ptemp.getName());
-                return p;
-            }).collect(Collectors.toList()));
-            return e;
-        }).collect(Collectors.toList());
+         return entities.stream().peek(e-> e.setTimeSheetProjects(e.getTimeSheetProjects().stream().peek(p->{
+             Project ptemp = getProject(p.getProjectId());
+             p.setDescription(ptemp.getDescription());
+             p.setName(ptemp.getName());
+         }).collect(Collectors.toList()))).collect(Collectors.toList());
     }
 
     @PostMapping
@@ -64,11 +61,14 @@ public class TimeSheetController {
 
     }
 
+    @HystrixCommand(fallbackMethod = "getFallbackProject")
     private Project getProject(Long id) {
-        try {
+        System.out.println("PROJECT_URL+id: "+PROJECT_URL+id);
             return restTemplate.getForObject(PROJECT_URL+id, Project.class);
-        } catch (Exception e) {
-            throw new TimeSheetException("No Project found with id:"+id);
-        }
+    }
+
+    private Project getFallbackProject(Long id) {
+        System.out.println("id0000000..........................."+id);
+        return new Project();
     }
 }

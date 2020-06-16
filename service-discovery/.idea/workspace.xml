@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2f6caef-b6aa-4a0b-816e-76d5ecace7e1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../timesheet/src/main/java/com/laminatimes/timesheet/entity/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lamina-holidays/src/main/java/com/lamina/holidays/LaminaHolidaysApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lamina-holidays/src/main/java/com/lamina/holidays/LaminaHolidaysApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../leaves/src/main/java/com/laminatimes/leaves/LeavesApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../leaves/src/main/java/com/laminatimes/leaves/LeavesApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projects/src/main/java/com/projects/ProjectsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../projects/src/main/java/com/projects/ProjectsApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projects/src/main/java/com/projects/controller/ProjectsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../projects/src/main/java/com/projects/controller/ProjectsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../timesheet/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../timesheet/src/main/java/com/laminatimes/timesheet/TimeSheetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/src/main/java/com/laminatimes/timesheet/TimeSheetController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../timesheet/src/main/java/com/laminatimes/timesheet/TimesheetApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/src/main/java/com/laminatimes/timesheet/TimesheetApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../timesheet/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +73,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1592304992617</updated>
-      <workItem from="1592304993874" duration="1270000" />
+      <workItem from="1592304993874" duration="3403000" />
     </task>
     <servers />
   </component>
