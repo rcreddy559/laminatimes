@@ -2,10 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2f6caef-b6aa-4a0b-816e-76d5ecace7e1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../timesheet/src/main/java/com/laminatimes/timesheet/DBDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config-server.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config-server/src/main/java/com/config/server/ConfigServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/java/com/config/server/ConfigServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config-server/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projects/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/../projects/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projects/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/../projects/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projects/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../projects/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projects/src/main/java/com/projects/ProjectsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../projects/src/main/java/com/projects/ProjectsApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projects/src/main/java/com/projects/controller/ProjectsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../projects/src/main/java/com/projects/controller/ProjectsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projects/src/main/java/com/projects/entity/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/../projects/src/main/java/com/projects/entity/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projects/src/main/java/com/projects/service/ProjectsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../projects/src/main/java/com/projects/service/ProjectsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projects/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../projects/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projects/src/test/java/com/projects/controller/ProjectsApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../projects/src/test/java/com/projects/controller/ProjectsApplicationTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../timesheet/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../timesheet/src/main/java/com/laminatimes/timesheet/TimeSheetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/src/main/java/com/laminatimes/timesheet/TimeSheetController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../timesheet/src/main/resources/application-test.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/src/main/resources/application-test.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../timesheet/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -17,7 +17,7 @@ public class ProjectsService {
     }
 
     public Object getProject(Long id) {
-        return repositry.findById(id).orElseThrow(()-> new ProjectsException("No Projects found with id "+id));
+        return repositry.findById(id).orElseThrow(() -> new ProjectsException("No Projects found with id " + id));
     }
 
     public void create(Project project) {
@@ -26,7 +26,7 @@ public class ProjectsService {
 
     public void update(Project project) {
         Project p = repositry.findById(project.getId())
-                .orElseThrow(()-> new ProjectsException("No Projects found with id "+project.getId()));
+                .orElseThrow(() -> new ProjectsException("No Projects found with id " + project.getId()));
 
         p.setDescription(project.getDescription());
         p.setName(project.getName());

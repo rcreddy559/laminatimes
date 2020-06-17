@@ -3,21 +3,42 @@ package com.projects.controller;
 import com.projects.entity.Project;
 import com.projects.service.ProjectsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/projects")
 public class ProjectsController {
+
+
+    @Value("${spring.application.name}")
+    private String applicationName;
+
+    @Value("${spring.env.prod: default value }")
+    private String defaultValue;
+
+    @Value("This is static value")
+    private String staticValue;
+
+    @Value("#{${sping.map.dbvalues}}")
+    private Map<String, String> dbValues;
 
     @Autowired
     private ProjectsService service;
 
     @GetMapping
     public List<Project> getProjects() {
+
+        System.out.println("applicationName: "+applicationName);
+        System.out.println("defaultValue: "+defaultValue);
+        System.out.println("staticValue: "+staticValue);
+        System.out.println("dbValues:"+dbValues);
+
         return service.getProjects();
     }
 

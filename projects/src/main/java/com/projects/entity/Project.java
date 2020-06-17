@@ -21,11 +21,13 @@ public class Project {
         this.name = name;
         this.description = description;
     }
+
     public Project(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
+
     @Override
     public String toString() {
         return "Projects{" +
