@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2f6caef-b6aa-4a0b-816e-76d5ecace7e1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../timesheet.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../timesheet/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../timesheet/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../timesheet/src/main/java/com/laminatimes/timesheet/TimeSheetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/src/main/java/com/laminatimes/timesheet/TimeSheetController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,13 +1,12 @@
 package com.laminatimes.timesheet;
 
 import com.laminatimes.timesheet.entity.*;
-import com.laminatimes.timesheet.exception.TimeSheetException;
 import com.laminatimes.timesheet.service.TimeSheetProjectService;
 import com.laminatimes.timesheet.service.TimeSheetService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/timesheet")
+@RefreshScope
 public class TimeSheetController {
 
     final String PROJECT_URL = "http://PROJECTS/projects/";
