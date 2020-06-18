@@ -1,8 +1,10 @@
 package com.laminatimes.controller;
 
 
+import com.laminatimes.utils.DBDetails;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +26,8 @@ import com.laminatimes.service.LeavesService;
 import com.laminatimes.utils.AppConstants;
 import com.laminatimes.utils.AppUtils;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/leaves")
 public class LeavesController {
@@ -32,8 +36,29 @@ public class LeavesController {
     @Autowired
     private LeavesService service;
 
-    @PostMapping
+	@Value("${spring.application.name}")
+	private String applicationName;
+
+	@Value("${spring.env.prod: default value }")
+	private String defaultValue;
+
+	@Value("This is static value")
+	private String staticValue;
+
+	@Value("#{${sping.map.dbvalues}}")
+	private Map<String, String> dbValues;
+
+	@Autowired
+	private DBDetails dbDetails;
+
+
+	@PostMapping
     public ResponseEntity<Leaves> create(@RequestBody LeavesRequest leaveRequest) {
+		System.out.println("applicationName: "+applicationName);
+		System.out.println("defaultValue: "+defaultValue);
+		System.out.println("staticValue: "+staticValue);
+		System.out.println("dbValues:"+dbValues);
+		System.out.println(dbDetails.toString());
         service.createLeaves(leaveRequest);
         return new ResponseEntity<Leaves>(HttpStatus.ACCEPTED);
     }
