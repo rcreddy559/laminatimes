@@ -73,17 +73,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-/*
-		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/user").permitAll()
+		httpSecurity.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/user").permitAll()
 				.antMatchers(HttpMethod.PUT, "/user").permitAll().antMatchers(HttpMethod.DELETE, "/user/*").permitAll()
 				.antMatchers(HttpMethod.GET, "/user/*").permitAll().antMatchers(HttpMethod.POST, "/login").permitAll()
-				.antMatchers(HttpMethod.POST, "/newuser/*").permitAll();*/
-		httpSecurity.csrf().disable()
-		.authorizeRequests().antMatchers(HttpMethod.POST,"/authenticate").permitAll().antMatchers(HttpMethod.POST, "/user").permitAll().
-				anyRequest().authenticated().and().
-				exceptionHandling().and().sessionManagement()
-		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+				.antMatchers(HttpMethod.POST, "/newuser/*").permitAll();
+//		httpSecurity.csrf().disable()
+//		.authorizeRequests().antMatchers(HttpMethod.POST,"/authenticate").permitAll().antMatchers(HttpMethod.POST, "/user").permitAll().
+//				anyRequest().authenticated().and().
+//				exceptionHandling().and().sessionManagement()
+//		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
 	}
 

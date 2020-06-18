@@ -34,7 +34,7 @@ public class UserController {
 	public UserRegRequest update(@RequestBody UserRegRequest userProfile) {
 		LOGGER.info("In registration controller update method ");
 		System.out.println("User Profile: -->> "+userProfile.toString());
-		userProfile = userRegistrationService.update(userProfile);
+		userRegistrationService.save(userProfile);
 		return userProfile;
 	}
 	

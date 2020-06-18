@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="033f689f-3d81-4fa0-bca6-89fbad431995" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/service/UserRegistrationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/service/UserRegistrationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-discovery/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../service-discovery/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GithubDefaultAccount">
     <option name="defaultAccountId" value="8e7a2c3c-fea0-4884-80e0-af412f0bce5d" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="autoscrollToSource" value="true" />
@@ -15,5 +31,11 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <servers />
   </component>
 </project>

@@ -2,20 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2f6caef-b6aa-4a0b-816e-76d5ecace7e1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../lamina-holidays/lamina-times.log.2020-06-17.0.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lamina-holidays/src/main/java/com/lamina/holidays/util/DBDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../leaves/src/main/java/com/laminatimes/utils/DBDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config-server/src/main/java/com/config/server/ConfigServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/src/main/java/com/config/server/ConfigServerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lamina-holidays/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lamina-holidays/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lamina-holidays/src/main/java/com/lamina/holidays/HolidaysController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lamina-holidays/src/main/java/com/lamina/holidays/HolidaysController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lamina-holidays/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../lamina-holidays/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../leaves/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../leaves/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../leaves/src/main/java/com/laminatimes/controller/LeavesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../leaves/src/main/java/com/laminatimes/controller/LeavesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../leaves/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../leaves/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../projects/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../projects/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/service/UserRegistrationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/service/UserRegistrationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api-gateway-service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../api-gateway-service/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../timesheet/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

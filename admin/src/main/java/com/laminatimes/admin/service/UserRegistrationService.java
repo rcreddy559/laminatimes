@@ -44,33 +44,33 @@ public class UserRegistrationService {
 		// convert from model request to user entity
 		encodePassword(userReq);
 
-		User user = setRole(userReq, new User());
+//		User user = setRole(userReq, new User());
+		User user = new User();
 		try {
 			BeanUtils.copyProperties(user, userReq);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 
 		System.out.println(" in user registoran repo: " + user.toString());
 
 		try {
-			int id = (int) usrRepo.save(user).getId();
-			int roleId = 0;
-			UserRole usrRole = new UserRole();
-			for (Role role : user.getRoles()) {
-				roleId = role.getId();
-				break;
-			}
-			usrRole.setRole_id(roleId);
-			usrRole.setUserId(id);
-			userRoleRepo.save(usrRole);
+//			usrRepo.save(user);
+// 			int id = (int) usrRepo.save(user).getId();
+//			int roleId = 0;
+//			UserRole usrRole = new UserRole();
+//			for (Role role : user.getRoles()) {
+//				roleId = role.getId();
+//				break;
+//			}
+//			usrRole.setRole_id(roleId);
+//			usrRole.setUserId(id);
+//			userRoleRepo.save(usrRole);
 		} catch (Exception e) {
 					e.printStackTrace();
 		}
 
-		return user;
+		return usrRepo.save(user);
 	}
 
 	private void encodePassword(UserRegRequest user) {
