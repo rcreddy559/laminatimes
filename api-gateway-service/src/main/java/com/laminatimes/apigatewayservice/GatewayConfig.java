@@ -12,8 +12,9 @@ public class GatewayConfig {
 	public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route(r -> r.path("/leaves/**").uri("http://localhost:8086").id("leaves-service"))
+				.route(r -> r.path("/authenticate/**").uri("http://localhost:8085").id("admin-service"))
+				.route(r -> r.path("/user/**").uri("http://localhost:8085").id("admin-service"))
 				.build();
-
 	}
 }
 
