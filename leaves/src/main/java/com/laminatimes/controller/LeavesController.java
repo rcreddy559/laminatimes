@@ -1,8 +1,9 @@
 package com.laminatimes.controller;
 
 
+import com.laminatimes.exception.LeavesException;
 import com.laminatimes.utils.DBDetails;
-import org.apache.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -16,22 +17,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.laminatimes.leaves.entity.Leaves;
 import com.laminatimes.payload.ApiResponse;
 import com.laminatimes.payload.LeavesResponse;
 import com.laminatimes.payload.PagedResponse;
-import com.laminatimes.payload.request.LeavesRequest;
+import com.laminatimes.payload.request.LeaveVO;
 import com.laminatimes.service.LeavesService;
 import com.laminatimes.utils.AppConstants;
 import com.laminatimes.utils.AppUtils;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/leaves")
+@RequestMapping("/leave")
 public class LeavesController {
-    static final Logger logger = Logger.getLogger(LeavesController.class);
+    static final Logger logger = LoggerFactory.getLogger(LeavesController.class);
 
     @Autowired
     private LeavesService service;
@@ -45,7 +48,7 @@ public class LeavesController {
 	@Value("This is static value")
 	private String staticValue;
 
-	@Value("#{${sping.map.dbvalues}}")
+//	@Value("#{${sping.map.dbvalues}}")
 	private Map<String, String> dbValues;
 
 	@Autowired
@@ -53,17 +56,27 @@ public class LeavesController {
 
 
 	@PostMapping
-    public ResponseEntity<Leaves> create(@RequestBody LeavesRequest leaveRequest) {
-		System.out.println("applicationName: "+applicationName);
-		System.out.println("defaultValue: "+defaultValue);
-		System.out.println("staticValue: "+staticValue);
-		System.out.println("dbValues:"+dbValues);
-		System.out.println(dbDetails.toString());
-        service.createLeaves(leaveRequest);
-        return new ResponseEntity<Leaves>(HttpStatus.ACCEPTED);
+    public ResponseEntity<LeaveVO> create(@RequestBody LeaveVO leaveRequest) {
+		logger.info("applicationName: {} ", applicationName);
+		logger.info("defaultValue:{} ", defaultValue);
+		logger.info("staticValue: {}", staticValue);
+		logger.info("dbValues: {}", dbValues);
+		logger.info(dbDetails.toString());
+
+
+		leaveRequest = service.createLeaves(leaveRequest);
+		logger.debug(leaveRequest.toString());
+        return new ResponseEntity<LeaveVO>(leaveRequest, HttpStatus.ACCEPTED);
     }
-    
-    @GetMapping
+
+    @RequestMapping
+	public List<LeaveVO> all() {
+		List<LeaveVO> leaves = service.getLeaves();
+		logger.debug("all leaves size: {} " , leaves.size());
+		return leaves;
+	}
+
+    @GetMapping("/range")
 	public PagedResponse<LeavesResponse> getAllLeaves(
 			@RequestParam(name = "page", required = false, defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) Integer page,
 			@RequestParam(name = "size", required = false, defaultValue = AppConstants.DEFAULT_PAGE_SIZE) Integer size) {
@@ -74,21 +87,28 @@ public class LeavesController {
 
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Leaves> getLeave(@PathVariable(name = "id") Integer id) {
-		return service.getLeave(id);
+	public LeaveVO getLeave(@PathVariable(name = "id") Integer id) {
+		LeaveVO leave = service.getLeave(id);
+		logger.debug(leave.toString());
+		return leave;
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<LeavesResponse> updateLeave(@PathVariable(name = "id") Integer id,  @RequestBody LeavesRequest newLeave
-			) {
-		return service.updateLeaves(id, newLeave);
+	public LeaveVO updateLeave( @RequestBody LeaveVO newLeave
+			) throws LeavesException {
+		if(newLeave.getId() != 0) {
+			LeaveVO leave = service.updateLeaves(newLeave);
+			logger.debug(leave.toString());
+			return leave;
+		} else {
+			logger.error("No id provided for update Leaves");
+			throw new LeavesException("No id");
+		}
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse> deleteLeave(@PathVariable(name = "id") Integer id) {
 		return service.deleteLeave(id);
 	}
-
-
 
 }

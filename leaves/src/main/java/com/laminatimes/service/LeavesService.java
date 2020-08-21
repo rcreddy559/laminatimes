@@ -1,10 +1,14 @@
 package com.laminatimes.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import com.laminatimes.payload.request.LeaveVO;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,10 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.laminatimes.exception.LeavesException;
 import com.laminatimes.leaves.entity.Leaves;
-import com.laminatimes.leaves.entity.User;
 import com.laminatimes.payload.LeavesResponse;
 import com.laminatimes.payload.PagedResponse;
-import com.laminatimes.payload.request.LeavesRequest;
 import com.laminatimes.repository.LeavesRepository;
 import com.laminatimes.repository.UserRepository;
 import com.laminatimes.utils.AppUtils;
@@ -26,7 +28,6 @@ import com.laminatimes.utils.AppUtils;
 @Service
 public class LeavesService {
 	static final Logger logger = Logger.getLogger(LeavesService.class);
-	private static final String NAME = "leaveName";
 	@Autowired
 	private LeavesRepository leavesRepo;
 
@@ -36,25 +37,25 @@ public class LeavesService {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	public void createLeaves(LeavesRequest leavesRequest) {
-
+	public LeaveVO createLeaves(LeaveVO leavesRequest) {
 		Leaves leaves = new Leaves();
-		leaves.setLeaveName(leavesRequest.getLeaveName());
-		leaves.setStartDate(leavesRequest.getStartDate());
-		leaves.setEndDate(leavesRequest.getEndDate());
-		leaves.setComments(leavesRequest.getComments());
+		BeanUtils.copyProperties(leavesRequest, leaves);
 
-		leaves.setEmployeeUser(getEmployee(leavesRequest.getEmployeeId()));
-		leaves.setCreatedBy(leavesRequest.getCreatedBy());
-
-		leavesRepo.save(leaves);
-
+		leaves = leavesRepo.save(leaves);
+		BeanUtils.copyProperties(leaves, leavesRequest);
+		return leavesRequest;
 	}
 
-	private User getEmployee(Integer empID) {
-		return userRepository.findById(empID)
-				.orElseThrow(() -> new LeavesException("Employee not found with id" + empID));
+	public List<LeaveVO> getLeaves() {
+		List<Leaves> leaves =  leavesRepo.findAll();
+		List<LeaveVO> leaveVOS = new ArrayList<>(leaves.size());
 
+		leaves.forEach(l->{
+			LeaveVO vo = new LeaveVO();
+			BeanUtils.copyProperties(l, vo);
+			leaveVOS.add(vo);
+		});
+		return leaveVOS;
 	}
 
 	public PagedResponse<LeavesResponse> getAllLeaves(int page, int size) {
@@ -63,9 +64,7 @@ public class LeavesService {
 	//	Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, NAME);
 		
 		Pageable pageable = PageRequest.of(page, size, Sort.by("leaveName"));
-
 		Page<Leaves> leaves = leavesRepo.findAll(pageable);
-
 		if (leaves.getNumberOfElements() == 0) {
 			return new PagedResponse<>(Collections.emptyList(), leaves.getNumber(), leaves.getSize(),
 					leaves.getTotalElements(), leaves.getTotalPages(), leaves.isLast());
@@ -78,25 +77,19 @@ public class LeavesService {
 				leaves.getTotalPages(), leaves.isLast());
 	}
 
-	public ResponseEntity<Leaves> getLeave(Integer id) {
+	public LeaveVO getLeave(Integer id) {
 		Leaves leaves = leavesRepo.findById(id).orElseThrow(() -> new LeavesException("leaves Not found"));
-		return new ResponseEntity<>(leaves, HttpStatus.OK);
+		LeaveVO leavesRequest = new LeaveVO();
+		BeanUtils.copyProperties(leaves, leavesRequest);
+		return leavesRequest;
 	}
 
-	public ResponseEntity<LeavesResponse> updateLeaves(Integer id, LeavesRequest newLeave) {
-		Leaves leave = leavesRepo.findById(id).orElseThrow(() -> new LeavesException("Leaves not found"));
-
-		leave.setLeaveName(newLeave.getLeaveName());
-		leave.setStartDate(newLeave.getStartDate());
-		leave.setEndDate(newLeave.getEndDate());
-		Leaves updatedLeaves = leavesRepo.save(leave);
-
-		LeavesResponse leavesResponse = new LeavesResponse();
-
-		modelMapper.map(updatedLeaves, leavesResponse);
-
-		return new ResponseEntity<>(leavesResponse, HttpStatus.OK);
-
+	public LeaveVO updateLeaves(LeaveVO newLeave) {
+		Leaves leave = new Leaves();
+		BeanUtils.copyProperties(newLeave, leave);
+		leave = leavesRepo.save(leave);
+		BeanUtils.copyProperties(leave, newLeave);
+		return newLeave;
 	}
 
 	public ResponseEntity<com.laminatimes.payload.ApiResponse> deleteLeave(Integer id) {
