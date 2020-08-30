@@ -2,7 +2,11 @@ package com.lamina.user.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.lamina.user.controller.UserDto;
+import com.lamina.user.exception.HolidayException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +18,45 @@ public class UserService {
 	@Autowired
 	UserRepository repository;
 
-	public List<User> getUsers() {
-		
-		return repository.findAll();
+	private static User dtoToVo(UserDto userDto) {
+		User user = new User();
+		BeanUtils.copyProperties(userDto, user);
+		return user;
 	}
 
-	public Optional<User> get(Integer id) {
-		return repository.findById(id);
+	public List<User> getUsers() {
+		List<UserDto> userDtos = repository.findAll();
+		return userDtos.stream().map(UserService::dtoToVo).collect(Collectors.toList());
+	}
+
+	public User get(int id) throws HolidayException {
+		Optional<UserDto> userDtoOptional = repository.findById(id);
+		if(userDtoOptional.isPresent()) {
+			User user = new User();
+			BeanUtils.copyProperties(userDtoOptional.get(), user);
+			return user;
+		} else  {
+			throw new HolidayException("User not found!");
+		}
 	}
 
 	public User save(User user) {
-		return repository.save(user);
+		UserDto userDto = new UserDto();
+		BeanUtils.copyProperties(user, userDto);
+		return dtoToVo(repository.save(userDto));
 	}
-	
-	
+
+    public User update(User user) {
+		UserDto userDto = new UserDto();
+		BeanUtils.copyProperties(user, userDto);
+		return dtoToVo(repository.save(userDto));
+    }
+
+    public void delete(int id) {
+		try {
+			repository.deleteById(id);
+		} catch (IllegalArgumentException e) {
+			throw new HolidayException("User not found!");
+		}
+	}
 }

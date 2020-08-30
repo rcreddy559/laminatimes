@@ -1,14 +1,15 @@
 package com.lamina.user.controller;
 
-import org.springframework.beans.BeanUtils;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class User {
+@Entity(name = "user")
+public class UserDto {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String firstName;
 	private String lastName;
@@ -16,17 +17,8 @@ public class User {
 	private String address;
 	private String phoneNumber;
 	private String email;
-	public User() {}
 
-	public User(int id, String firstName, String lastName, String dateOfBirth, String address, String phoneNumber, String email) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dateOfBirth = dateOfBirth;
-		this.address = address;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-	}
+	public UserDto(){}
 
 	public int getId() {
 		return id;

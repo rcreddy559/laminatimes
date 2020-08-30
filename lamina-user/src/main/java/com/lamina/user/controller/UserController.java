@@ -1,20 +1,17 @@
 package com.lamina.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import com.lamina.user.service.UserService;
-
 import java.util.List;
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @RestController
 @RequestMapping("/user")
@@ -23,34 +20,65 @@ public class UserController {
 	
 	@Autowired
 	UserService service;
+
+	@Autowired
+	RestTemplate restTemplate;
+
+	@Value("${url.leave}")
+	String leaveUrl;
+
+	@Value("${url.holiday}")
+	String holidayUrl;
 	
-	@GetMapping()
+	@GetMapping
 	public List<User> getUsers() {
 		logger.info(" get all users");
-		
 		return service.getUsers();
-		
 	}
-	
+
 	@GetMapping("/{id}")
-	public User getUser(@PathVariable Integer id) {
-		logger.info("get User");
-		Optional<User> user = service.get(id);
-		logger.info("User: {}", user.toString());
-		return user.get();
+	public User get(@PathVariable int id) {
+		logger.info("Get User id:{}", id);
+		return service.get(id);
 	}
 	
-	@PostMapping()
+	@PostMapping
 	public User save(@RequestBody User user) {
-		logger.info("Create user");
-		User userResult = service.save(user);
-		logger.info("Create User: {}", user.toString());
-		return userResult;
+		logger.info("Create user: {}", user.toString());
+		logger.info("Leave user url: {}", leaveUrl);
+		logger.info("Holiday user url: {}", holidayUrl);
+		return service.save(user);
 	}
-	
-	@GetMapping("/timesheet")
-	public UsetTimesheet getTimesheet(@PathVariable Integer id) {
-		User user = getUser(id);
-		
+
+	@PutMapping
+	public User update(@RequestBody User user) {
+		logger.info("Update user: {}", user.toString() );
+		return service.update(user);
+	}
+
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable int id){
+		logger.debug("Delete user id:{}", id);
+		service.delete(id);
+	}
+
+	@GetMapping("/timesheet/{id}")
+	public UserTimesheet getTimesheet(@PathVariable int id) {
+		logger.info("Get time sheet for user id: {}", id);
+		User user = get(id);
+		logger.info(user.toString());
+
+		ResponseEntity<List<Leave>> leaveEntity = restTemplate.exchange(
+				leaveUrl, HttpMethod.GET, null,
+				new ParameterizedTypeReference<List<Leave>>(){});
+
+		List<Leave> leaves = leaveEntity.getBody();
+		logger.info("Leaves size: {}", leaves.size());
+
+		List<Holiday> holidays = WebClient.create().get().uri(holidayUrl).retrieve()
+									.toEntityList(Holiday.class).block().getBody();
+
+		logger.info("Holiday size: {}", holidays.size());
+		return new UserTimesheet(user, leaves, holidays);
 	}
 }
