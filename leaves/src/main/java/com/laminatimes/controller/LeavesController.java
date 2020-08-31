@@ -72,29 +72,28 @@ public class LeavesController {
 
     @RequestMapping
 	public List<LeaveVO> all() throws Exception {
+		List<LeaveVO> leaves = service.getLeaves();
+		logger.debug("all leaves size: {} " , leaves.size());
+
+		leaves.forEach(leaveVO -> {
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+			logger.debug("Leave: {}", leaveVO.toString());
+		});
 //		Thread.sleep(60*60*360);
-//		List<LeaveVO> leaves = service.getLeaves();
-//		logger.debug("all leaves size: {} " , leaves.size());
-//
-//		leaves.forEach(leaveVO -> {
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//			logger.debug("Leave: {}", leaveVO.toString());
-//		});
-		throw new Exception("test one");
-//		return Collections.EMPTY_LIST;
+		return leaves;
 	}
 
     @GetMapping("/range")
