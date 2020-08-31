@@ -20,7 +20,26 @@ public class UserDto {
 
 	public UserDto(){}
 
-	public int getId() {
+    public UserDto(int id, String ravichandra, String reddy, String s, String thalapuala_palli, String s1, String s2) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+    }
+
+    public UserDto(String first_name, String last_name, String s, String thalapual_palli, String s1, String s2) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+    }
+
+    public int getId() {
 		return id;
 	}
 	public void setId(int id) {

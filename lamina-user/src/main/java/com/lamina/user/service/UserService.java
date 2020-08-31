@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.lamina.user.controller.UserController;
 import com.lamina.user.controller.UserDto;
 import com.lamina.user.exception.HolidayException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,7 @@ import com.lamina.user.controller.User;
 
 @Service
 public class UserService {
+	Logger logger = LoggerFactory.getLogger(UserService.class);
 
 	@Autowired
 	UserRepository repository;
@@ -41,6 +45,8 @@ public class UserService {
 	}
 
 	public User save(User user) {
+		logger.info("User Service ---------->>>>>>>>");
+//		logger.info(user.toString());
 		UserDto userDto = new UserDto();
 		BeanUtils.copyProperties(user, userDto);
 		return dtoToVo(repository.save(userDto));

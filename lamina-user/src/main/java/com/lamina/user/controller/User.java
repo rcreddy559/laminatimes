@@ -28,6 +28,15 @@ public class User {
 		this.email = email;
 	}
 
+	public User( String firstName, String lastName, String dateOfBirth, String address, String phoneNumber, String email) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+	}
+
 	public int getId() {
 		return id;
 	}
