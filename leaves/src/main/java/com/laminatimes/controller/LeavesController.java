@@ -28,6 +28,7 @@ import com.laminatimes.service.LeavesService;
 import com.laminatimes.utils.AppConstants;
 import com.laminatimes.utils.AppUtils;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +49,7 @@ public class LeavesController {
 	@Value("This is static value")
 	private String staticValue;
 
-//	@Value("#{${sping.map.dbvalues}}")
+//	@Value("${sping.map.dbvalues}")
 	private Map<String, String> dbValues;
 
 	@Autowired
@@ -57,23 +58,43 @@ public class LeavesController {
 
 	@PostMapping
     public ResponseEntity<LeaveVO> create(@RequestBody LeaveVO leaveRequest) {
-		logger.info("applicationName: {} ", applicationName);
-		logger.info("defaultValue:{} ", defaultValue);
-		logger.info("staticValue: {}", staticValue);
-		logger.info("dbValues: {}", dbValues);
-		logger.info(dbDetails.toString());
+		logger.debug("applicationName: {} ", applicationName);
+		logger.debug("defaultValue:{} ", defaultValue);
+		logger.debug("staticValue: {}", staticValue);
+		logger.debug("dbValues: {}", dbValues);
+		logger.debug(dbDetails.toString());
 
 
 		leaveRequest = service.createLeaves(leaveRequest);
 		logger.debug(leaveRequest.toString());
-        return new ResponseEntity<LeaveVO>(leaveRequest, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(leaveRequest, HttpStatus.ACCEPTED);
     }
 
     @RequestMapping
-	public List<LeaveVO> all() {
-		List<LeaveVO> leaves = service.getLeaves();
-		logger.debug("all leaves size: {} " , leaves.size());
-		return leaves;
+	public List<LeaveVO> all() throws Exception {
+//		Thread.sleep(60*60*360);
+//		List<LeaveVO> leaves = service.getLeaves();
+//		logger.debug("all leaves size: {} " , leaves.size());
+//
+//		leaves.forEach(leaveVO -> {
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//			logger.debug("Leave: {}", leaveVO.toString());
+//		});
+		throw new Exception("test one");
+//		return Collections.EMPTY_LIST;
 	}
 
     @GetMapping("/range")

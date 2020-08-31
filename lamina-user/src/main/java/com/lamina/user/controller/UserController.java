@@ -1,8 +1,17 @@
 package com.lamina.user.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
 import com.lamina.user.service.UserService;
+
+import java.util.Collections;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +23,15 @@ public class UserController {
 	
 	@Autowired
 	UserService service;
+	
+	@Autowired
+	RestTemplate restTemplate;
+
+	@Value("${url.leave}")
+	String leaveUrl;
+
+	@Value("${url.holiday}")
+	String holidayUrl;
 
 	@GetMapping
 	public List<User> getUsers() {
@@ -46,8 +64,20 @@ public class UserController {
 	}
 
 	@GetMapping("/timesheet/{id}")
+	@HystrixCommand(fallbackMethod = "getTimesheetFallBack")
 	public UserTimesheet getTimesheet(@PathVariable int id) {
 		logger.info("Get time sheet for user id: {}", id);
-		return service.getTimesheet(id);
+		
+		List<Leave> leaves = restTemplate.getForObject(leaveUrl, List.class);
+		List<Holiday> holidays = restTemplate.getForObject(holidayUrl, List.class);
+		
+		return new UserTimesheet(service.get(id), leaves, holidays);
 	}
+	
+	public UserTimesheet getTimesheetFallBack(@PathVariable int id) {
+		logger.error("---------------getTimesheetFallBack---------------------");
+		return new UserTimesheet();
+	}
+
+	 
 }

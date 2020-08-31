@@ -45,13 +45,13 @@ public class HolidaysController {
     }
 
     @GetMapping
-    public List<Holiday> getHolidays() {
+    public List<Holiday> getHolidays() throws InterruptedException {
         logger.info("All holidays");
         logger.info("Application name is applicationName: {}" , applicationName);
         logger.info("Default Value defaultValue: {}",defaultValue);
         logger.info("Static value staticValue: {}",staticValue);
         logger.info(dbDetails.toString());
-
+//        Thread.sleep(60*60*360);
         return service.getHolidays();
     }
 
