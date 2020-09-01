@@ -1,0 +1,5 @@
+# create docker image
+#docker build -t  user/laminatimes .
+
+#push to docker hub
+#docker push user/laminatimes
