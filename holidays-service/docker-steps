@@ -1,0 +1,5 @@
+# create docker image
+#docker build -t  holidays/laminatimes .
+
+#push to docker hub
+#docker push holidays/laminatimes
