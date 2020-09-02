@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.lamina.projects</groupId>
-	<artifactId>projects</artifactId>
+	<artifactId>projects-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>projects</name>
-	<description>Projects</description>
+	<name>projects-service</name>
+	<description>Projects details</description>
 
 	<properties>
 		<java.version>11</java.version>
