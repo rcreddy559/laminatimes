@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.config.server</groupId>
-	<artifactId>config-server</artifactId>
+	<artifactId>config-server-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>config-server</name>
+	<name>config-server-service</name>
 	<description>Spring Cloud Config Server</description>
 	<packaging>jar</packaging>
 
