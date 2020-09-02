@@ -3,11 +3,7 @@ pipeline {
  
     stages {
  
-        stage('Checkout') {
-            git url: 'https://github.com/ravichandrap/laminatimes.git', credentialsId: 'github-sravanpalakala', branch: 'master'
-        }
- 
-        stage('Build') {
+      stage('Build') {
             sh 'mvn clean install'
  
             def pom = readMavenPom file:'pom.xml'
