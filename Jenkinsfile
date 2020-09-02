@@ -5,7 +5,7 @@ pipeline {
  
       stage('Build') {
       
-        step {
+        steps {
             sh 'mvn clean install'
  
             def pom = readMavenPom file:'pom.xml'
@@ -15,7 +15,7 @@ pipeline {
         }
  
         stage('Image') {
-        step {
+        steps {
             dir ('discovery-service') {
                 def app = docker.build "localhost:5000/discovery-service:${env.version}"
                 app.push()
@@ -24,7 +24,7 @@ pipeline {
         }
  
         stage ('Run') {
-          step {
+          steps {
             docker.image("localhost:5000/discovery-service:${env.version}").run('-p 8761:8761 -h discovery --name discovery')
           }
         }
