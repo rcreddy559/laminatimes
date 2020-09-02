@@ -21,13 +21,6 @@ pipeline {
             }
           }
         }
- 
-        stage ('Run') {
-          steps {
-           
-          }
-        }
- 
         
     }
  
