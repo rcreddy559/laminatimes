@@ -1,6 +1,7 @@
-node {
+pipeline {
+    agent any
  
-    withMaven(maven:'maven') {
+    stages {
  
         stage('Checkout') {
             git url: 'https://github.com/ravichandrap/laminatimes.git', credentialsId: 'github-sravanpalakala', branch: 'master'
