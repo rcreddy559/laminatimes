@@ -64,7 +64,7 @@ public class UserController {
 	}
 
 	@GetMapping("/timesheet/{id}")
-	@HystrixCommand(fallbackMethod = "getTimesheetFallBack")
+	//@HystrixCommand(fallbackMethod = "getTimesheetFallBack")
 	public UserTimesheet getTimesheet(@PathVariable int id) {
 		logger.info("Get time sheet for user id: {}", id);
 		
