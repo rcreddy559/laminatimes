@@ -1,17 +1,13 @@
 package com.lamina.user.controller;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.lamina.user.config.KafkaSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import com.lamina.user.service.UserService;
 
-import java.util.Collections;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +29,9 @@ public class UserController {
 	@Value("${url.holiday}")
 	String holidayUrl;
 
+	@Autowired
+	private KafkaSender sender;
+
 	@GetMapping
 	public List<User> getUsers() {
 		logger.info(" get all users");
@@ -48,7 +47,9 @@ public class UserController {
 	@PostMapping
 	public User save(@RequestBody User user) {
 		logger.info("Create user: {}", user.toString());
-		return service.save(user);
+		User user2 = service.save(user);
+		sender.sendData(user);
+		return user2;
 	}
 
 	@PutMapping
@@ -63,6 +64,7 @@ public class UserController {
 		service.delete(id);
 	}
 
+
 	@GetMapping("/timesheet/{id}")
 	//@HystrixCommand(fallbackMethod = "getTimesheetFallBack")
 	public UserTimesheet getTimesheet(@PathVariable int id) {
@@ -70,7 +72,7 @@ public class UserController {
 		
 		List<Leave> leaves = restTemplate.getForObject(leaveUrl, List.class);
 		List<Holiday> holidays = restTemplate.getForObject(holidayUrl, List.class);
-		
+
 		return new UserTimesheet(service.get(id), leaves, holidays);
 	}
 	

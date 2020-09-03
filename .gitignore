@@ -1,0 +1,8 @@
+
+api-gateway-service/api-gateway-service.iml
+api-gateway-service/.classpath
+*.xml
+*.xml
+*.prefs
+*.iml
+api-gateway-service/target/classes/com/laminatimes/apigatewayservice/ApiGatewayServiceApplication.class
