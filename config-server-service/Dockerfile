@@ -1,7 +1,6 @@
 FROM openjdk:12-jdk-alpine
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} config-server.jar
-ENTRYPOINT ["java","-jar","/config-server.jar"]
 
+ADD target/config-server-service.jar config-server-service.jar
+ENTRYPOINT ["java", "-jar", "/config-server-service.jar"]
 EXPOSE 8888
 

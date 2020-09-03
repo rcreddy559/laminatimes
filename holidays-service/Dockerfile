@@ -1,6 +1,7 @@
 FROM openjdk:12-jdk-alpine
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} holidays.jar
-ENTRYPOINT ["java","-jar","/holidays.jar"]
+
+ADD target/holidays-service.jar holidays-service.jar
+ENTRYPOINT ["java", "-jar", "/holidays-service.jar"]
 
 EXPOSE 8088
+

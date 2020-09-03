@@ -1,6 +1,5 @@
 FROM openjdk:12-jdk-alpine
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} leaves.jar
-ENTRYPOINT ["java","-jar","/leaves.jar"]
+ADD target/leaves-service.jar leaves-service.jar
+ENTRYPOINT ["java", "-jar", "/leaves-service.jar"]
 
 EXPOSE 8086

@@ -1,7 +1,5 @@
-FROM   openjdk:latest
+FROM openjdk:12-jdk-alpine
 
-ADD  target/admin-0.0.1-SNAPSHOT.jar app.jar
-
-ENTRYPOINT ["java","-jar","app.jar"]
-
-EXPOSE 8085
+ADD target/admin.jar admin.jar
+ENTRYPOINT ["java", "-jar", "/admin.jar"]
+EXPOSE 8084

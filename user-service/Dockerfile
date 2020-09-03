@@ -1,6 +1,5 @@
 FROM openjdk:12-jdk-alpine
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} user.jar
-ENTRYPOINT ["java","-jar","/user.jar"]
 
-EXPOSE 8111
+ADD target/user-service.jar  user-service.jar
+ENTRYPOINT ["java", "-jar", "/user-service.jar"]
+EXPOSE 8084
