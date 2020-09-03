@@ -5,58 +5,76 @@ node {
     dir('laminatimes-pipeline') {
         stage("Compilation and Analysis") {
             parallel 'Compilation': {
-                sh "mvn clean install -DskipTests"
+                if (isUnix()) {
+                    sh "./mvnw clean install -DskipTests"
+                } else {
+                    bat "./mvnw.cmd clean install -DskipTests"
+                }
             }, 'Static Analysis': {
                 stage("Checkstyle") {
-                    sh "mvn checkstyle:checkstyle"
-                    
-                    step([$class: 'CheckStylePublisher',
-                      canRunOnFailed: true,
-                      defaultEncoding: '',
-                      healthy: '100',
-                      pattern: '**/target/checkstyle-result.xml',
-                      unHealthy: '90',
-                      useStableBuildAsReference: true
-                    ])
+                    if (isUnix()) {
+                        sh "./mvnw checkstyle:checkstyle"
+                    } else {
+                        bat "./mvnw.cmd checkstyle:checkstyle"
+                    }
+                     step([$class: 'CheckStylePublisher',
+                          canRunOnFailed: true,
+                          defaultEncoding: '',
+                          healthy: '100',
+                          pattern: '**/target/checkstyle-result.xml',
+                          unHealthy: '90',
+                          useStableBuildAsReference: true
+                        ])
                 }
             }
         }
-        
+
         stage("Tests and Deployment") {
             parallel 'Unit tests': {
-                stage("Runing unit tests") {
+                stage("Running unit tests") {
                     try {
-                        sh "mvn test -Punit"
+                        if (isUnix()) {
+                            sh "./mvnw test -Punit"
+                        } else {
+                            bat "./mvnw.cmd test -Punit"
+                        }
                     } catch(err) {
-                        step([$class: 'JUnitResultArchiver', testResults: 
-                          '**/target/surefire-reports/TEST-*UnitTest.xml'])
+                        step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*UnitTest.xml'])
                         throw err
                     }
-                   step([$class: 'JUnitResultArchiver', testResults: 
-                     '**/target/surefire-reports/TEST-*UnitTest.xml'])
+                    step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*UnitTest.xml'])
+
                 }
             }, 'Integration tests': {
-                stage("Runing integration tests") {
+                stage("Running integration tests") {
                     try {
-                        sh "mvn test -Pintegration"
+                        if (isUnix()) {
+                            sh "./mvnw test -Pintegration"
+                        } else {
+                            bat "./mvnw.cmd test -Pintegration"
+                        }
                     } catch(err) {
-                        step([$class: 'JUnitResultArchiver', testResults: 
-                          '**/target/surefire-reports/TEST-' 
-                            + '*IntegrationTest.xml'])
+                        step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*IntegrationTest.xml'])
                         throw err
                     }
-                    step([$class: 'JUnitResultArchiver', testResults: 
-                      '**/target/surefire-reports/TEST-' 
-                        + '*IntegrationTest.xml'])
+                    step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*IntegrationTest.xml'])
                 }
             }
-            
+
             stage("Staging") {
-                sh "pid=\$(lsof -i:8989 -t); kill -TERM \$pid " 
-                  + "|| kill -KILL \$pid"
+                if (isUnix()) {
+                    sh "pid=\$(lsof -i:8989 -t); kill -TERM \$pid || kill -KILL \$pid"
+                } else {
+                    bat "FOR /F \"tokens=5 delims= \" %%G IN (\"netstat -a | findstr :8989\") DO TaskKill.exe /PID %%G /fi \"memusage gt 0\""
+                }
+
                 withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
-                    sh 'nohup mvn spring-boot:run -Dserver.port=8989 &'
-                }   
+                    if (isUnix()) {
+                        sh 'nohup ./mvnw spring-boot:run -Dserver.port=8989 &'
+                    } else {
+                        bat 'start mvnw.cmd spring-boot:run -Dserver.port=8989'
+                    }
+                }
             }
         }
     }
