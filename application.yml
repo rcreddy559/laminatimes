@@ -15,9 +15,6 @@ spring:
     console:
       enabled: true
 
-server:
-  port: 8084
-
 logging:
   file:
     name: /Users/ravi/Desktop/logs/user-service/user-service.log
