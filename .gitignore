@@ -6,3 +6,4 @@ api-gateway-service/.classpath
 *.prefs
 *.iml
 api-gateway-service/target/classes/com/laminatimes/apigatewayservice/ApiGatewayServiceApplication.class
+*.class
