@@ -7,3 +7,8 @@ api-gateway-service/.classpath
 *.iml
 api-gateway-service/target/classes/com/laminatimes/apigatewayservice/ApiGatewayServiceApplication.class
 *.class
+api-gateway-service/.classpath
+api-gateway-service/.classpath
+api-gateway-service/.idea/misc.xml
+api-gateway-service/api-gateway-service.iml
+*.class
