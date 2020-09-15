@@ -78,9 +78,9 @@ pipeline {
 			}
 	        steps {
 	           withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
-	                        accessKeyVariable: 'AKIA2CMJ5W6SPEVGGLKM', 
+	                        accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
 	                    credentialsId: 'AWS_Credentials', 
-	                    secretKeyVariable: 'xdOWZrUA8P5117/WlTo0bdP6eCHRmckg0PEyF8BR']]) {
+	                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
 	               withCredentials([kubeconfigFile(credentialsId: 'kubernetes_config', 
 	                        variable: 'KUBECONFIG')]) {
 	               sh """

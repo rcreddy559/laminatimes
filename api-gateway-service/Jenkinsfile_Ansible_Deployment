@@ -47,9 +47,9 @@ pipeline {
                 script{
                     dir("${params.AppName}") {
                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
-	                    accessKeyVariable: 'AKIA2CMJ5W6SPEVGGLKM', 
+	                    accessKeyVariable: 'AWS_ACCESS_KEY', 
 	                    credentialsId: 'AWS_Credentials', 
-	                    secretKeyVariable: 'xdOWZrUA8P5117/WlTo0bdP6eCHRmckg0PEyF8BR']]) {
+	                    secretKeyVariable: 'AWS_SECRET_KEY']]) {
 	                        withCredentials([kubeconfigFile(credentialsId: 'kubernetes_config', 
 	                        variable: 'KUBECONFIG')]) {
                             sh "ansible-playbook  playbook.yml --extra-vars image_id=${params.docker_repo}/${params.ImageName}:${params.ImageTag}"
