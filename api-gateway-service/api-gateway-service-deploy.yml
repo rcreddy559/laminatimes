@@ -1,40 +1,19 @@
-# Config Map
-kind: ConfigMap 
-apiVersion: apps/v1 
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
-  name: api-gateway-service-configmap
+ name: api-gateway-service
+spec:
+ replicas: 1
+ template:
+  metadata:
+   labels:
+    name: api-gateway-service
+  spec:
+    containers:
+   - name: api-gateway-service
+     image: sravanpalakala/api-gateway-service
+     ports:
+     - containerPort: 8085
+     - containerPort: 50000
+    
 
----
-# Replication Controller for api-gateway-service
-apiVersion: apps/v1
-kind: ReplicationController
-metadata:
-  name: api-gateway-service-controller
-spec:
-  replicas: 1
-  selector:
-    app: api-gateway-service
-  template:
-    metadata:
-      labels:
-        app: api-gateway-service
-    spec:
-      containers:
-      - image: sravanpalakala/api-gateway-service
-        name: api-gateway-service
-        ports:
-        - containerPort: 8085  
-       
----
-# Node Port Service For api-gateway-service
-apiVersion: apps/v1
-kind: Service
-metadata:
-  name: api-gateway-service
-spec:
-  type: NodePort
-  ports:
-    - port: 8085
-      targetPort: 8085
-  selector:
-    app: api-gateway-service
