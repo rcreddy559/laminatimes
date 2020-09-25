@@ -1,0 +1,79 @@
+
+pipeline {
+  agent any
+ parameters {
+	choice(name: 'action', choices: 'create\nrollback', description: 'Create/rollback of the deployment')
+    string(name: 'ImageName', description: "Name of the docker build")
+	string(name: 'ImageTag', description: "Name of the docker build")
+	string(name: 'AppName', description: "Name of the Application")
+    string(name: 'docker_repo', description: "Name of docker repository")
+  }
+  tools{ 
+        maven 'maven3'
+    }
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git branch: 'master',
+                    url: 'https://github.com/ravichandrap/laminatimes.git'
+                
+            }
+        }
+        stage('Build Maven'){
+    		steps {
+        		dir("${params.AppName}") {
+        		    sh 'mvn clean package'
+        		}
+    		}
+	    }
+	    stage("Docker Build ") {
+	   		steps {
+        		dir("${params.AppName}") {
+	                sh 'docker build -t sravanpalakala/api-gateway-service . ' 
+        	     	}
+	            }
+	    }         
+	    
+	    
+	    stage("Docker Push") { 
+	     steps {
+	            dir("${params.AppName}") {
+	                withCredentials([string(credentialsId: 'Docker_Hub_Pwd', variable: 'Docker_Hub_Pwd')]) {
+                            sh "docker login -u  sravanpalakala -p ${Docker_Hub_Pwd}"
+                        }
+	               
+	                sh 'docker push  sravanpalakala/api-gateway-service:latest'
+	           
+	            }
+	        }
+	    }
+	    
+	     stage("Deploy To Kuberates Cluster"){
+	        steps {
+	            dir("${params.AppName}") {
+                       kubernetesDeploy(
+                         configs: 'api-gateway-service-deploy.yml', 
+                         kubeconfigId: 'kubernetes-config',
+                         enableConfigSubstitution: true
+                        )
+                     }
+	    
+	        }
+	     }
+	     
+	     
+	      stage("Deploy Service To Kuberates Cluster"){
+	        steps {
+	            dir("${params.AppName}") {
+                       kubernetesDeploy(
+                         configs: 'service.yml', 
+                         kubeconfigId: 'kubernetes-config',
+                         enableConfigSubstitution: true
+                        )
+                     }
+	    
+	        }
+	     }
+	    
+	  }
+}
