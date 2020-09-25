@@ -23,7 +23,11 @@ public class ApiGatewayServiceApplication {
 	public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
 		logger.info("gatewayRoutes() method");
 		return builder.routes()
-				.route(r -> r.path("/leave/**").uri("http://3.236.116.183:30616"))
+				 .route(p -> p
+				            .path("/get")
+				            .filters(f -> f.addRequestHeader("Hello", "World"))
+				            .uri("http://httpbin.org:80"))
+				.route(r -> r.path("/leave/**").uri("http://10.109.46.59:8086"))
 				.route(r -> r.path("/user/**").uri("http://localhost:8084"))
 				.route(r -> r.path("/holiday/**").uri("http://localhost:8088"))
 				.build();
