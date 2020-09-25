@@ -25,7 +25,7 @@ public class ApiGatewayServiceApplication {
 	public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
 		logger.info("gatewayRoutes() method");
 		return builder.routes()
-				.route(r -> r.path("/leave/**").uri("http://172.31.75.57:8086"))
+				.route(r -> r.path("/leave/**").uri("http://10.109.46.59:8086"))
 				.route(r -> r.path("/user/**").uri("http://localhost:8084"))
 				.route(r -> r.path("/holiday/**").uri("http://localhost:8088"))
 				.build();
