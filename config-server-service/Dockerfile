@@ -1,6 +1,18 @@
 FROM openjdk:12-jdk-alpine
 
-ADD target/config-server-service.jar config-server-service.jar
-ENTRYPOINT ["java", "-jar", "/config-server-service.jar"]
+
+# Required for starting application up.
+RUN apk update && apk add /bin/sh
+
+RUN mkdir -p /opt/app
+ENV PROJECT_HOME /opt/app
+
+COPY  target/config-server-service-0.0.1-SNAPSHOT.jar  $PROJECT_HOME/config-server-service.jar
+
+WORKDIR $PROJECT_HOME
+
+CMD ["java" ,"-jar","./config-server-service.jar"]
+
+
 EXPOSE 8888
 
