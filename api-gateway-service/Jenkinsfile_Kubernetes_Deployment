@@ -29,7 +29,7 @@ pipeline {
 	    stage("Docker Build ") {
 	   		steps {
         		dir("${params.AppName}") {
-	                sh 'docker build -t sravanpalakala/api-gateway-service . ' 
+	                sh "docker build -t ${params.docker_repo}/${params.AppName} . " 
         	     	}
 	            }
 	    }         
@@ -39,10 +39,10 @@ pipeline {
 	     steps {
 	            dir("${params.AppName}") {
 	                withCredentials([string(credentialsId: 'Docker_Hub_Pwd', variable: 'Docker_Hub_Pwd')]) {
-                            sh "docker login -u  sravanpalakala -p ${Docker_Hub_Pwd}"
+                            sh "docker login -u  ${params.docker_repo} -p ${Docker_Hub_Pwd}"
                         }
 	               
-	                sh 'docker push  sravanpalakala/api-gateway-service:latest'
+	                sh "docker push  ${params.docker_repo}/${params.AppName}:latest"
 	           
 	            }
 	        }
