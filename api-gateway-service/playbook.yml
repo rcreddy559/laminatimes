@@ -1,4 +1,8 @@
-- hosts: 18.232.119.137
+- hosts: all
+     remote_user: root
+     tasks:
+       - name: deploy ssh key to account
+         authorized_key: user='ec2-user' key="{{lookup('file','/home/ec2-user/.ssh/id_rsa.pub')}}"
   vars:
     ansible_python_interpreter: '/usr/bin/python3'
   tasks:
