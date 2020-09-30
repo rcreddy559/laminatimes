@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: 172.31.75.57
   vars:
     ansible_python_interpreter: '/usr/bin/python3'
   tasks:
