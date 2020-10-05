@@ -1,6 +1,6 @@
-- hosts: workernode
+- hosts: master-node
   vars:
-    ansible_python_interpreter: '/usr/bin/python3.7'
+    ansible_python_interpreter: '/bin/python'
   tasks:
   - name: Deploy the service
     k8s:
