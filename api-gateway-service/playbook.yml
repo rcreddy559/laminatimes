@@ -13,4 +13,4 @@
       state: present
       validate_certs: no
       namespace: default
-      definition: "{{ lookup('template', 'api-gateway-service-deployment.yml') | from_yaml }}"
+      definition: "{{ lookup('template', 'api-gateway-service-deploy.yml') | from_yaml }}"
