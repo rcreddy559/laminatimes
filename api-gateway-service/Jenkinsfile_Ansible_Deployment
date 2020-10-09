@@ -1,63 +1,69 @@
-@Library('jenkins-shared-library@master') _
-pipeline {
 
+pipeline {
   agent any
-  
-  parameters {
+ parameters {
 	choice(name: 'action', choices: 'create\nrollback', description: 'Create/rollback of the deployment')
     string(name: 'ImageName', description: "Name of the docker build")
 	string(name: 'ImageTag', description: "Name of the docker build")
 	string(name: 'AppName', description: "Name of the Application")
     string(name: 'docker_repo', description: "Name of docker repository")
   }
-      
   tools{ 
         maven 'maven3'
     }
     stages {
         stage('Git Checkout') {
             steps {
-                gitCheckout(
-                    branch: "master",
-                    url: "https://github.com/ravichandrap/laminatimes.git"
-                )
+                git branch: 'master',
+                    url: 'https://github.com/ravichandrap/laminatimes.git'
+                
             }
         }
         stage('Build Maven'){
     		steps {
         		dir("${params.AppName}") {
-        			sh 'mvn clean package'
+        		    sh 'mvn clean package'
         		}
     		}
 	    }
-	    stage("Docker Build and Push") {
-	        steps {
+	    stage("Docker Build ") {
+	   		steps {
+        		dir("${params.AppName}") {
+	                sh "docker build -t ${params.docker_repo}/${params.AppName} . " 
+        	     	}
+	            }
+	    }         
+	    
+	    
+	    stage("Docker Push") { 
+	     steps {
 	            dir("${params.AppName}") {
-	                dockerBuild ( "${params.ImageName}", "${params.docker_repo}" )
+	                withCredentials([string(credentialsId: 'Docker_Hub_Pwd', variable: 'Docker_Hub_Pwd')]) {
+                            sh "docker login -u  ${params.docker_repo} -p ${Docker_Hub_Pwd}"
+                        }
+	               
+	                sh "docker push  ${params.docker_repo}/${params.AppName}:latest"
+	           
 	            }
 	        }
 	    }
-	    stage("Docker CleanUP") {
-	        steps {
-	            dockerCleanup ( "${params.ImageName}", "${params.docker_repo}" )
-			}
-		}
-	    stage ('Deploy') {
+	    
+	  
+	     
+	     stage ('Deploy') {
             steps {
                 script{
                     dir("${params.AppName}") {
-                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
-	                    accessKeyVariable: 'AWS_ACCESS_KEY', 
-	                    credentialsId: 'AWS_Credentials', 
-	                    secretKeyVariable: 'AWS_SECRET_KEY']]) {
-	                        withCredentials([kubeconfigFile(credentialsId: 'kubernetes_config', 
-	                        variable: 'KUBECONFIG')]) {
-                            sh "ansible-playbook  playbook.yml --extra-vars image_id=${params.docker_repo}/${params.ImageName}:${params.ImageTag}"
-                          }
-	                }
+                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS_Credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+						  withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
+                                ansiblePlaybook credentialsId: 'jenkins-private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'playbook.yml'
+						        //  sh "/usr/local/bin/ansible-playbook  playbook.yml  -i /etc/ansible/hosts -u ec2-user   -vvv  --extra-vars  image_id=${params.docker_repo}/${params.ImageName}:${params.ImageTag}"
+						    }
+						}
                     }
                }
            }
        }
-    }
+	    
+	  }
 }
