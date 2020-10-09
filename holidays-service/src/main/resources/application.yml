@@ -10,7 +10,7 @@ spring:
 
 logging:
   file:
-    name: /Users/ravi/Desktop/logs/holidays-service/holidays-service.log
+    name: holidays-service.log
 
 kafka:
   boot:
