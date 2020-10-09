@@ -27,8 +27,10 @@ public class ApiGatewayServiceApplication {
 		return builder.routes()
 				.route(r -> r.path("/leave/**").uri("http://LEAVES-SERVICE"))
 				.route(r -> r.path("/leave1/**").uri("http://leaves-service"))
-				.route(r -> r.path("/user/**").uri("http://localhost:8084"))
-				.route(r -> r.path("/holiday/**").uri("http://localhost:8088"))
+				.route(r -> r.path("/user/**").uri("http://USER-SERVICE"))
+				.route(r -> r.path("/user1/**").uri("http://user-service"))
+				.route(r -> r.path("/holiday/**").uri("http://HOLIDAYS-SERVICE"))
+				.route(r -> r.path("/holiday1/**").uri("http://holidays-service"))
 				.build();
 	}
 	
