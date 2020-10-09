@@ -12,8 +12,8 @@ logging:
     name: user-service.log
 
 url:
-  holiday: http://3.236.229.114:32651/holidays
-  leave: http://3.236.229.114:32512/leave
+  holiday: http://3.236.229.114:31082/holidays
+  leave: http://3.236.229.114:31082/leave
 
 kafka:
   boot:
