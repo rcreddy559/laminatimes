@@ -9,7 +9,7 @@ server:
 
 logging:
   file:
-    name: /logs/user-service/user-service.log
+    name: user-service.log
 
 url:
   holiday: http://3.236.229.114:32651/holidays
