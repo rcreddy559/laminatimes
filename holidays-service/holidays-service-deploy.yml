@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: holidays-service-deployment
+  labels:
+    app: holidays-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: holidays-service
+  template:
+    metadata:
+      labels:
+        app: holidays-service
+    spec:
+      containers:
+      - name: holidays-service
+        image: sravanpalakala/holidays-service
+        ports:
+        - containerPort: 8088
