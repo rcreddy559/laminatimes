@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    config:
+      uri: http://CONFIG-SERVER
+  application:
+    name: user-service
+server:
+  port: 8123
+
+logging:
+  file:
+    name: /Users/ravi/Desktop/logs/user-service/user-service.log
+
+url:
+  holiday: http://HOLIDAYS-SERVICE/holidays
+  leave: http://LEAVES-SERVICE/leave
+
+kafka:
+  boot:
+    server: localhost:9092
+  topic:
+    name: myTopic-kafkasender
