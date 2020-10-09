@@ -71,8 +71,8 @@ public class UserController {
 		logger.info("Rest template : Leave URL: {}", leaveUrl);
 		logger.info("Rest template : Holiday URL: {}", holidayUrl);
 
-		List<Leave> leaves = restTemplate.getForObject(leaveUrl, List.class);
-		List<Holiday> holidays = restTemplate.getForObject(holidayUrl, List.class);
+		List<Leave> leaves = restTemplate.getForObject("http://3.236.229.114:32512/leave", List.class);
+		List<Holiday> holidays = restTemplate.getForObject("http://3.236.229.114:32651/holidays/", List.class);
 
 		return new UserTimesheet(service.get(id), leaves, holidays);
 	}
