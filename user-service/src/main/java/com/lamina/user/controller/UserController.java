@@ -47,9 +47,7 @@ public class UserController {
 	@PostMapping
 	public User save(@RequestBody User user) {
 		logger.info("Create user: {}", user.toString());
-		User user2 = service.save(user);
-//		sender.sendData(user);
-		return user2;
+		return service.save(user);
 	}
 
 	@PutMapping
@@ -70,6 +68,9 @@ public class UserController {
 	public UserTimesheet getTimesheet(@PathVariable int id) {
 		logger.info("Get time sheet for user id: {}", id);
 		
+		logger.info("Rest template : Leave URL: {}", leaveUrl);
+		logger.info("Rest template : Holiday URL: {}", holidayUrl);
+
 		List<Leave> leaves = restTemplate.getForObject(leaveUrl, List.class);
 		List<Holiday> holidays = restTemplate.getForObject(holidayUrl, List.class);
 

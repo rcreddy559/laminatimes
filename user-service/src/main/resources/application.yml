@@ -9,7 +9,7 @@ server:
 
 logging:
   file:
-    name: /Users/ravi/Desktop/logs/user-service/user-service.log
+    name: /logs/user-service/user-service.log
 
 url:
   holiday: http://HOLIDAYS-SERVICE/holidays

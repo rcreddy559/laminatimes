@@ -43,7 +43,6 @@ public class UserService {
 
 	public User save(final User user) {
 		logger.info("User Service ---------->>>>>>>>");
-		logger.info(user.toString());
 
 		UserDto userDto = new UserDto();
 		BeanUtils.copyProperties(user, userDto);
