@@ -1,5 +1,7 @@
 Manifest-Version: 1.0
-Built-By: SravanPalakala
-Build-Jdk: 14.0.1
+Build-Jdk-Spec: 14
+Implementation-Title: user-service
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor: Pivotal Software, Inc.
 Created-By: Maven Integration for Eclipse
 
