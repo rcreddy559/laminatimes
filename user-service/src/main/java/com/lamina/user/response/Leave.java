@@ -1,4 +1,4 @@
-package com.lamina.user.controller;
+package com.lamina.user.response;
 
 public class Leave {
 

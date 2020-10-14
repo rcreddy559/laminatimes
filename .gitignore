@@ -5,10 +5,12 @@ api-gateway-service/.classpath
 *.xml
 *.prefs
 *.iml
-api-gateway-service/target/classes/com/laminatimes/apigatewayservice/ApiGatewayServiceApplication.class
 *.class
 api-gateway-service/.classpath
 api-gateway-service/.classpath
 api-gateway-service/.idea/misc.xml
-api-gateway-service/api-gateway-service.iml
 *.class
+.idea/**/**
+api-gateway-service/api-gateway-service.iml
+auth-service/.idea/**/**
+api-gateway-service/target/**/**

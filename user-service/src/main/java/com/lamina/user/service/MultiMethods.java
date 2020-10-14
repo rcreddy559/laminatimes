@@ -1,13 +1,11 @@
 package com.lamina.user.service;
 
-import com.lamina.user.controller.User;
-import org.springframework.kafka.annotation.KafkaHandler;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Component;
+
+import com.lamina.user.controller.UserResponse;
 
 public class MultiMethods {
 
-    public void user(User foo) {
+    public void user(UserResponse foo) {
         System.out.println("Received: " + foo);
     }
 

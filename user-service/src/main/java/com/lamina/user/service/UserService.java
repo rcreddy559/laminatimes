@@ -5,7 +5,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.lamina.user.controller.*;
-import com.lamina.user.exception.HolidayException;
+import com.lamina.user.exception.UserException;
+import com.lamina.user.response.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -19,48 +20,57 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 
-	private static User dtoToVo(UserDto userDto) {
-		User user = new User();
-		BeanUtils.copyProperties(userDto, user);
-		return user;
+	private static UserResponse dtoToVo(User user) {
+		UserResponse userResponse = new UserResponse();
+		BeanUtils.copyProperties(user, userResponse);
+		return userResponse;
 	}
 
-	public List<User> getUsers() {
-		List<UserDto> userDtos = userRepository.findAll();
+	public List<UserResponse> getUsers() {
+		List<User> userDtos = userRepository.findAll();
 		return userDtos.stream().map(UserService::dtoToVo).collect(Collectors.toList());
 	}
-
-	public User get(int id) throws HolidayException {
-		Optional<UserDto> userDtoOptional = userRepository.findById(id);
+	public UserResponse get(String userName) throws UserException {
+		Optional<User> userDtoOptional = userRepository.findByUserName(userName);
 		if(userDtoOptional.isPresent()) {
-			User user = new User();
-			BeanUtils.copyProperties(userDtoOptional.get(), user);
-			return user;
+			UserResponse userResponse = new UserResponse();
+			BeanUtils.copyProperties(userDtoOptional.get(), userResponse);
+			return userResponse;
 		} else  {
-			throw new HolidayException("User not found!");
+			throw new UserException("User not found with userName: " + userName);
+		}
+	}
+	public UserResponse get(int id) throws UserException {
+		Optional<User> userDtoOptional = userRepository.findById(id);
+		if(userDtoOptional.isPresent()) {
+			UserResponse userResponse = new UserResponse();
+			BeanUtils.copyProperties(userDtoOptional.get(), userResponse);
+			return userResponse;
+		} else  {
+			throw new UserException("User not found with id: " + id);
 		}
 	}
 
-	public User save(final User user) {
-		logger.info("User Service ---------->>>>>>>>");
+	public UserResponse save(final UserResponse userResponse) {
+		logger.info("UserResponse Service ---------->>>>>>>>");
 
-		UserDto userDto = new UserDto();
-		BeanUtils.copyProperties(user, userDto);
-		final UserDto userDtoResult = userRepository.save(userDto);
-		return dtoToVo(userDtoResult);
+		User user = new User();
+		BeanUtils.copyProperties(user, userResponse);
+		final User u = userRepository.save(user);
+		return dtoToVo(u);
 	}
 
-    public User update(User user) {
-		UserDto userDto = new UserDto();
-		BeanUtils.copyProperties(user, userDto);
-		return dtoToVo(userRepository.save(userDto));
+    public UserResponse update(UserResponse userResponse) {
+		User user = new User();
+		BeanUtils.copyProperties(user, userResponse);
+		return dtoToVo(userRepository.save(user));
     }
 
     public void delete(int id) {
 		try {
 			userRepository.deleteById(id);
 		} catch (IllegalArgumentException e) {
-			throw new HolidayException("User not found!");
+			throw new UserException("UserResponse not found!");
 		}
 	}
 }

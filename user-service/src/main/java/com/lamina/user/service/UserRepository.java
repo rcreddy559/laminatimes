@@ -1,12 +1,14 @@
 package com.lamina.user.service;
 
-import com.lamina.user.controller.UserDto;
+import com.lamina.user.response.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.lamina.user.controller.User;
+import java.util.Optional;
+
 
 @Repository
-public interface UserRepository extends JpaRepository<UserDto, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
+    Optional<User> findByUserName(String userName);
 }

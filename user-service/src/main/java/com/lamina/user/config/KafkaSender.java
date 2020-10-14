@@ -1,6 +1,6 @@
 package com.lamina.user.config;
 
-import com.lamina.user.controller.User;
+import com.lamina.user.controller.UserResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +24,11 @@ public class KafkaSender {
 	@Value("${kafka.topic.name}")
 	private String topicName;
 
-	public void sendData(User student) {
+	public void sendData(UserResponse student) {
 		// TODO Auto-generated method stub
 		Map<String, Object> headers = new HashMap<>();
 		headers.put(KafkaHeaders.TOPIC, topicName);
-		kafkaTemplate.send(new GenericMessage<User>(student, headers));
+		kafkaTemplate.send(new GenericMessage<UserResponse>(student, headers));
 		// use the below to send String values through kafka
 		 kafkaTemplate.send(topicName, student);
 		LOGGER.info("Data - " + student.toString() + " sent to Kafka Topic - " + topicName);

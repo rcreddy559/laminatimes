@@ -1,6 +1,10 @@
 package com.lamina.user.controller;
 
 import com.lamina.user.config.KafkaSender;
+import com.lamina.user.exception.UserException;
+import com.lamina.user.response.Holiday;
+import com.lamina.user.response.Leave;
+import com.lamina.user.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -32,26 +36,41 @@ public class UserController {
 	@Autowired
 	private KafkaSender sender;
 
+	@PostMapping("/login")
+	public UserResponse login(@RequestBody UserResponse userResponse) {
+		UserResponse response = service.get(userResponse.getUserName());
+
+		if(validateLogin(userResponse, response)) {
+			return response;
+		} else {
+			throw new UserException("User not found with username:"+ userResponse.getUserName());
+		}
+	}
+
+	private boolean validateLogin(UserResponse userResponse, UserResponse response) {
+		return UserUtil.matchesPassword(userResponse.getPassword(), response.getPassword());
+	}
+
 	@GetMapping
-	public List<User> getUsers() {
+	public List<UserResponse> getUsers() {
 		logger.info(" get all users");
 		return service.getUsers();
 	}
 
 	@GetMapping("/{id}")
-	public User get(@PathVariable int id) {
+	public UserResponse get(@PathVariable int id) {
 		logger.info("Get User id:{}", id);
 		return service.get(id);
 	}
 	
 	@PostMapping
-	public User save(@RequestBody User user) {
+	public UserResponse save(@RequestBody UserResponse user) {
 		logger.info("Create user: {}", user.toString());
 		return service.save(user);
 	}
 
 	@PutMapping
-	public User update(@RequestBody User user) {
+	public UserResponse update(@RequestBody UserResponse user) {
 		logger.info("Update user: {}", user.toString() );
 		return service.update(user);
 	}

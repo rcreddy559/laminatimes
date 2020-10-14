@@ -4,6 +4,7 @@ spring:
       uri: http://CONFIG-SERVER
   application:
     name: user-service
+
 server:
   port: 8123
 
@@ -20,3 +21,7 @@ kafka:
     server: localhost:9092
   topic:
     name: myTopic-kafkasender
+
+debug: false
+
+
