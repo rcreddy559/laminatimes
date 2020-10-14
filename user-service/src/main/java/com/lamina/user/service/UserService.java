@@ -22,7 +22,7 @@ public class UserService {
 
 	private static UserResponse dtoToVo(User user) {
 		UserResponse userResponse = new UserResponse();
-		BeanUtils.copyProperties(user, userResponse);
+		copyProps(user, userResponse);
 		return userResponse;
 	}
 
@@ -32,9 +32,10 @@ public class UserService {
 	}
 	public UserResponse get(String userName) throws UserException {
 		Optional<User> userDtoOptional = userRepository.findByUserName(userName);
+		logger.info("User present :::::::: {} ", userDtoOptional.isPresent());
 		if(userDtoOptional.isPresent()) {
 			UserResponse userResponse = new UserResponse();
-			BeanUtils.copyProperties(userDtoOptional.get(), userResponse);
+			copyProps(userDtoOptional.get(), userResponse );
 			return userResponse;
 		} else  {
 			throw new UserException("User not found with userName: " + userName);
@@ -44,7 +45,7 @@ public class UserService {
 		Optional<User> userDtoOptional = userRepository.findById(id);
 		if(userDtoOptional.isPresent()) {
 			UserResponse userResponse = new UserResponse();
-			BeanUtils.copyProperties(userDtoOptional.get(), userResponse);
+			copyProps(userDtoOptional.get(), userResponse );
 			return userResponse;
 		} else  {
 			throw new UserException("User not found with id: " + id);
@@ -55,18 +56,26 @@ public class UserService {
 		logger.info("UserResponse Service ---------->>>>>>>>");
 
 		User user = new User();
-		BeanUtils.copyProperties(user, userResponse);
+		copyProps(userResponse, user);
 		final User u = userRepository.save(user);
 		return dtoToVo(u);
 	}
 
     public UserResponse update(UserResponse userResponse) {
 		User user = new User();
-		BeanUtils.copyProperties(user, userResponse);
+		copyProps(userResponse, user);
 		return dtoToVo(userRepository.save(user));
     }
 
-    public void delete(int id) {
+	private static void copyProps(UserResponse source, User destination) {
+		BeanUtils.copyProperties(source, destination);
+	}
+
+	private static void copyProps( User source, UserResponse destination) {
+		BeanUtils.copyProperties(source, destination);
+	}
+
+	public void delete(int id) {
 		try {
 			userRepository.deleteById(id);
 		} catch (IllegalArgumentException e) {

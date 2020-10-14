@@ -3,9 +3,12 @@ package com.lamina.user.response;
 
 import javax.persistence.*;
 
+import java.time.LocalDate;
+
 import static com.lamina.user.util.UserUtil.encodePassword;
 
 @Entity(name = "user")
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "userName")})
 public class User {
 
 	@Id
@@ -13,12 +16,12 @@ public class User {
 	private int id;
 	private String firstName;
 	private String lastName;
-	private String dateOfBirth;
+	private LocalDate dateOfBirth;
 	private String address;
 	private String phoneNumber;
 	private String email;
 
-	@Column(unique = true)
+	@Column(unique = true, nullable = false, name = "userName")
 	private String userName;
 	private String password;
 	private int active;
@@ -26,13 +29,13 @@ public class User {
 
 	public User(){}
 
-    public User(int id, String firstName, String lastName, String dateOfBirth, String address,
+    public User(int id, String firstName, String lastName, LocalDate dateOfBirth, String address,
 				String phoneNumber, String email, String userName, String password, int active, String gender) {
 		this( firstName,  lastName,  dateOfBirth,  address, phoneNumber, email, userName, password, active, gender);
 		this.id = id;
     }
 
-    public User(String firstName, String lastName, String dateOfBirth,
+    public User(String firstName, String lastName, LocalDate dateOfBirth,
 				String address, String phoneNumber, String email,
 				String userName, String password, int active, String gender) {
 		this.firstName = firstName;
@@ -60,7 +63,7 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = encodePassword(password);
 	}
 
 	public int getId() {
@@ -81,10 +84,10 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public String getAddress() {
@@ -105,19 +108,15 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public int getActive() {
 		return active;
 	}
-
 	public void setActive(int active) {
 		this.active = active;
 	}
-
 	public String getGender() {
 		return gender;
 	}
-
 	public void setGender(String gender) {
 		this.gender = gender;
 	}

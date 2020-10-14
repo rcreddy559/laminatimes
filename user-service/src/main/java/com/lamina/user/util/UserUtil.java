@@ -15,5 +15,9 @@ public final class UserUtil {
     public static boolean matchesPassword(String rawString, String encodedPassword) {
         return encoder.matches(rawString, encodedPassword);
     }
-    
+
+    public static void main(String[] args) {
+        System.out.println(matchesPassword("test", "$2a$12$TC.qsL1OzITQVpJ/QR1V3OtzaqxNLJ4xI7YJonNQsYxfgV1M9bBAC"));
+    }
+
 }

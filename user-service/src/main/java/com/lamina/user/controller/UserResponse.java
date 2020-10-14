@@ -2,13 +2,14 @@ package com.lamina.user.controller;
 
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class UserResponse implements Serializable {
 
 	private int id;
 	private String firstName;
 	private String lastName;
-	private String dateOfBirth;
+	private LocalDate dateOfBirth;
 	private String address;
 	private String phoneNumber;
 	private String email;
@@ -20,23 +21,14 @@ public class UserResponse implements Serializable {
 
 	public UserResponse() {}
 
-	public UserResponse of(int id, String firstName, String lastName,
-				   String dateOfBirth, String address, String phoneNumber,
-				   String email, long salary, String userName, String password, int active, String gender) {
-
-		return new UserResponse(id, firstName, lastName,dateOfBirth, address, phoneNumber, email, salary, userName, password, active, gender);
-	}
-
-
-
-	public UserResponse(int id, String firstName, String lastName, String dateOfBirth,
+	public UserResponse(int id, String firstName, String lastName, LocalDate dateOfBirth,
 						String address, String phoneNumber, String email, long salary,
 						String userName, String password, int active, String gender) {
 		this(firstName, lastName, dateOfBirth, address, phoneNumber, email, salary, userName, password, active, gender);
 		this.id = id;
 	}
 
-	public UserResponse(String firstName, String lastName, String dateOfBirth,
+	public UserResponse(String firstName, String lastName, LocalDate dateOfBirth,
 						String address, String phoneNumber, String email, long salary,
 						String userName, String password, int active, String gender) {
 		this.firstName = firstName;
@@ -94,10 +86,10 @@ public class UserResponse implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public String getAddress() {

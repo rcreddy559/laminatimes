@@ -38,18 +38,15 @@ public class UserController {
 
 	@PostMapping("/login")
 	public UserResponse login(@RequestBody UserResponse userResponse) {
-		UserResponse response = service.get(userResponse.getUserName());
+		final UserResponse response = service.get(userResponse.getUserName());
 
-		if(validateLogin(userResponse, response)) {
+		if(UserUtil.matchesPassword(userResponse.getPassword(), response.getPassword())) {
 			return response;
 		} else {
-			throw new UserException("User not found with username:"+ userResponse.getUserName());
+			throw new UserException("User credentials not match, enter correct user name and password!");
 		}
 	}
 
-	private boolean validateLogin(UserResponse userResponse, UserResponse response) {
-		return UserUtil.matchesPassword(userResponse.getPassword(), response.getPassword());
-	}
 
 	@GetMapping
 	public List<UserResponse> getUsers() {
@@ -101,5 +98,4 @@ public class UserController {
 		return new UserTimesheet();
 	}
 
-	 
 }
