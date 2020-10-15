@@ -20,8 +20,16 @@ logging:
     name: /Users/ravi/Desktop/logs/user-service/user-service.log
 
 url:
-  holiday: http://3.236.229.114:32651/holidays
-  leave: http://3.236.229.114:32512/leave
+  holiday: http://HOLIDAYS-SERVICE
+  api-gateway: http://API-GATEWAY-SERVICE
+  auth: http://AUTH-SERVICE
+  config: http://CONFIG-SERVER-SERVICE
+  leave: http://LEAVES-SERVICE
+  user: http://USER-SERVICE
+
+
+
+
 
 kafka:
   boot:
