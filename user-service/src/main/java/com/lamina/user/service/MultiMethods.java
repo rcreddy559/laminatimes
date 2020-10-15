@@ -1,7 +1,7 @@
 package com.lamina.user.service;
 
 
-import com.lamina.user.controller.UserResponse;
+import com.lamina.user.response.UserResponse;
 
 public class MultiMethods {
 

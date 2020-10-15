@@ -4,6 +4,7 @@ import com.lamina.user.config.KafkaSender;
 import com.lamina.user.exception.UserException;
 import com.lamina.user.response.Holiday;
 import com.lamina.user.response.Leave;
+import com.lamina.user.response.UserResponse;
 import com.lamina.user.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

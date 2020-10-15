@@ -2,7 +2,7 @@ package com.lamina.user.controller;
 
 import com.lamina.user.response.Holiday;
 import com.lamina.user.response.Leave;
-import com.lamina.user.service.UserRepository;
+import com.lamina.user.response.UserResponse;
 
 import java.util.Collections;
 import java.util.List;

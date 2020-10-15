@@ -1,5 +1,6 @@
 package com.lamina.user.response;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -75,4 +76,6 @@ public class Holiday {
                 ", endDate=" + endDate +
                 '}';
     }
+
+
 }

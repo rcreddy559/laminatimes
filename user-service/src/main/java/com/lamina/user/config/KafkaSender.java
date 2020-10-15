@@ -1,6 +1,6 @@
 package com.lamina.user.config;
 
-import com.lamina.user.controller.UserResponse;
+import com.lamina.user.response.UserResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
