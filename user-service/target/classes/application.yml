@@ -1,0 +1,35 @@
+spring:
+  cloud:
+    config:
+      uri: http://CONFIG-SERVER
+    server:
+      git:
+        uri: https://github.com/ravichandrap/laminatimes
+  application:
+    name: user-service
+  h2:
+    console:
+      settings:
+        trace: true
+        web-allow-others: false
+
+server:
+  port: 8123
+
+logging:
+  file:
+    name: user-service.log
+
+url:
+  holiday: http://3.236.229.114:31082/holidays
+  leave: http://3.236.229.114:31082/leave
+
+kafka:
+  boot:
+    server: localhost:9092
+  topic:
+    name: myTopic-kafkasender
+
+debug: false
+
+

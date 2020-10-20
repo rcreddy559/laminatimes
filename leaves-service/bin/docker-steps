@@ -1,0 +1,5 @@
+# create docker image
+#docker build -t  leaves/laminatimes .
+
+#push to docker hub
+#docker push leaves/laminatimes

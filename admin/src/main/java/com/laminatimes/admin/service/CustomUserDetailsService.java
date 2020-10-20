@@ -16,7 +16,7 @@ import com.laminatimes.admin.repository.UserRepository;
 
 
 @Service("customUserDetailsService")
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService extends User implements UserDetailsService {
     
     @Autowired
     UserRepository  userRepo;
@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
        	Optional<User>  optionalUser =  userRepo.findByWorkEmail(username);
     	optionalUser.orElseThrow(() -> new UserNotFoundRuntimeException("user name not found"));
-   	 	 return new org.springframework.security.core.userdetails.User(optionalUser.get().getUserName(), optionalUser.get().getPassword(), getAuthorities(optionalUser.get()));
+   	 	 return new org.springframework.security.core.userdetails.User(optionalUser.get().getWorkEmail(), optionalUser.get().getPassword(), getAuthorities(optionalUser.get()));
      }
    
 	 public Collection<? extends GrantedAuthority> getAuthorities(User user){

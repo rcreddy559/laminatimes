@@ -1,0 +1,31 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: api-gateway-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: api-gateway-service
+  ports:
+    - name: http
+      protocol: TCP
+      # ELB's port
+      port: 8085
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway-service
+  template:
+    metadata:
+      labels:
+        app: api-gateway-service
+    spec:
+      containers:
+        - name: api-gateway-service
+          image: sravanpalakala/api-gateway-service:latest

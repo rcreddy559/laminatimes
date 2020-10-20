@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leaves-service-deployment
+  labels:
+    app: leaves-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: leaves-service
+  template:
+    metadata:
+      labels:
+        app: leaves-service
+    spec:
+      containers:
+      - name: leaves-service
+        image: sravanpalakala/leaves-service
+        ports:
+        - containerPort: 8086

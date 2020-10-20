@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="033f689f-3d81-4fa0-bca6-89fbad431995" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/4/442292b8a7efeabbe4cc176709b833b1792140ec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/d/8d9e8af128d6bfe372ec427743e340a84d9f6e59" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/4/b4332f0d2241c526ed7a79122ae9094f8bb80194" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lamina-holidays/lamina-times.log.2020-06-19.0.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lamina-holidays/lamina-times.log.2020-06-25.0.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/AdminApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/AdminApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/controller/LoginAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/src/main/java/com/laminatimes/admin/controller/LoginAuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admin/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../admin/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laminatimes/apigatewayservice/ApiGatewayServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laminatimes/apigatewayservice/ApiGatewayServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/laminatimes/apigatewayservice/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/laminatimes/apigatewayservice/GatewayConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laminatimes/apigatewayservice/ApiGatewayServiceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laminatimes/apigatewayservice/ApiGatewayServiceApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/laminatimes/apigatewayservice/GatewayConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/laminatimes/apigatewayservice/GatewayConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../config-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lamina-holidays/lamina-times.log.2020-06-15.0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lamina-holidays/lamina-times.log.2020-06-16.0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lamina-holidays/lamina-times.log.2020-06-17.0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lamina-holidays/src/main/java/com/lamina/holidays/HolidaysController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lamina-holidays/src/main/java/com/lamina/holidays/HolidaysController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../service-discovery/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../service-discovery/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../timesheet/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../timesheet/src/main/java/com/laminatimes/timesheet/TimeSheetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../timesheet/src/main/java/com/laminatimes/timesheet/TimeSheetController.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="8e7a2c3c-fea0-4884-80e0-af412f0bce5d" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1dY46AuNFmq0tR8zEMDHRixEwzB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="restartRequiresConfirmation" value="false" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="ApiGatewayServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="api-gateway-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.laminatimes.apigatewayservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.laminatimes.apigatewayservice.ApiGatewayServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.ApiGatewayServiceApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="033f689f-3d81-4fa0-bca6-89fbad431995" name="Default Changelist" comment="" />
+      <created>1592588514613</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592588514613</updated>
+      <workItem from="1592588537031" duration="596000" />
+      <workItem from="1593086852505" duration="6802000" />
+      <workItem from="1593202844930" duration="31000" />
+      <workItem from="1594894381612" duration="707000" />
+      <workItem from="1595266815196" duration="598000" />
+      <workItem from="1595324940738" duration="1195000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1146" height="316" key="GridCell.Tab.0.bottom" timestamp="1593092339481">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1146" height="316" key="GridCell.Tab.0.bottom/1680.23.1920.1057/56.23.1624.1027@1680.23.1920.1057" timestamp="1593092339481" />
+    <state width="1146" height="345" key="GridCell.Tab.0.bottom/47.23.1873.1057@47.23.1873.1057" timestamp="1592585419356" />
+    <state width="1146" height="316" key="GridCell.Tab.0.center" timestamp="1593092339480">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1146" height="316" key="GridCell.Tab.0.center/1680.23.1920.1057/56.23.1624.1027@1680.23.1920.1057" timestamp="1593092339480" />
+    <state width="1146" height="345" key="GridCell.Tab.0.center/47.23.1873.1057@47.23.1873.1057" timestamp="1592585419355" />
+    <state width="1146" height="316" key="GridCell.Tab.0.left" timestamp="1593092339480">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1146" height="316" key="GridCell.Tab.0.left/1680.23.1920.1057/56.23.1624.1027@1680.23.1920.1057" timestamp="1593092339480" />
+    <state width="1146" height="345" key="GridCell.Tab.0.left/47.23.1873.1057@47.23.1873.1057" timestamp="1592585419355" />
+    <state width="1146" height="316" key="GridCell.Tab.0.right" timestamp="1593092339481">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1146" height="316" key="GridCell.Tab.0.right/1680.23.1920.1057/56.23.1624.1027@1680.23.1920.1057" timestamp="1593092339481" />
+    <state width="1146" height="345" key="GridCell.Tab.0.right/47.23.1873.1057@47.23.1873.1057" timestamp="1592585419356" />
+    <state width="1146" height="316" key="GridCell.Tab.1.bottom" timestamp="1593092339482">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1146" height="316" key="GridCell.Tab.1.bottom/1680.23.1920.1057/56.23.1624.1027@1680.23.1920.1057" timestamp="1593092339482" />
+    <state width="1146" height="345" key="GridCell.Tab.1.bottom/47.23.1873.1057@47.23.1873.1057" timestamp="1592585419357" />
+    <state width="1146" height="316" key="GridCell.Tab.1.center" timestamp="1593092339482">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1146" height="316" key="GridCell.Tab.1.center/1680.23.1920.1057/56.23.1624.1027@1680.23.1920.1057" timestamp="1593092339482" />
+    <state width="1146" height="345" key="GridCell.Tab.1.center/47.23.1873.1057@47.23.1873.1057" timestamp="1592585419356" />
+    <state width="1146" height="316" key="GridCell.Tab.1.left" timestamp="1593092339481">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1146" height="316" key="GridCell.Tab.1.left/1680.23.1920.1057/56.23.1624.1027@1680.23.1920.1057" timestamp="1593092339481" />
+    <state width="1146" height="345" key="GridCell.Tab.1.left/47.23.1873.1057@47.23.1873.1057" timestamp="1592585419356" />
+    <state width="1146" height="316" key="GridCell.Tab.1.right" timestamp="1593092339482">
+      <screen x="1680" y="23" width="1920" height="1057" />
+    </state>
+    <state width="1146" height="316" key="GridCell.Tab.1.right/1680.23.1920.1057/56.23.1624.1027@1680.23.1920.1057" timestamp="1593092339482" />
+    <state width="1146" height="345" key="GridCell.Tab.1.right/47.23.1873.1057@47.23.1873.1057" timestamp="1592585419357" />
+  </component>
+</project>

@@ -1,0 +1,25 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: holidays-service
+  cloud:
+    config:
+      uri: http://CONFIG-SERVER
+    server:
+      git:
+        uri: https://github.com/ravichandrap/laminatimes
+
+logging:
+  file:
+    name: holidays-service.log
+
+kafka:
+  boot:
+    server: localhost:9092
+  topic:
+    name: myTopic-kafkasender
+  consumer:
+    group:
+      id: lamina-group-id

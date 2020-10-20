@@ -1,0 +1,41 @@
+spring:
+  cloud:
+    config:
+      uri: http://CONFIG-SERVER
+  datasource:
+    url: jdbc:h2:mem:test
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+
+logging:
+  file:
+    name: /Users/ravi/Desktop/logs/user-service/user-service.log
+
+url:
+  holiday: http://HOLIDAYS-SERVICE
+  api-gateway: http://API-GATEWAY-SERVICE
+  auth: http://AUTH-SERVICE
+  config: http://CONFIG-SERVER-SERVICE
+  leave: http://LEAVES-SERVICE
+  user: http://USER-SERVICE
+
+
+
+
+
+kafka:
+  boot:
+    server: localhost:9092
+  topic:
+    name: lamina-topic
+  consumer:
+    group:
+      id: lamina-group-id
