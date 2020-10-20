@@ -9,14 +9,19 @@ public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column(name = "user_id")
     private long userId;
     private int active;
     private String name;
     private String symbol;
     private LocalDateTime date;
+    @Column(name = "net_qty")
     private long netQty;
+    @Column(name = "avg_price")
     private double avgPrice;
     private double ltp;
+
+    @Column(name = "current_price")
     private double currentPrice;
 
 
