@@ -6,7 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 @EnableEurekaClient
 @SpringBootApplication
@@ -26,4 +25,13 @@ public class StockMarketServiceApplication {
         StockDao dao =  new StockDaoImpl();
         return dao;
     }
+
+
+//    @Bean
+//    public HibernateTemplate setBean() {
+//        HibernateTemplate hibernateTemplate = new HibernateTemplate();
+//        hibernateTemplate.setSessionFactory((SessionFactory) new HibernateConfiguration().sessionFactory());
+//        return new HibernateTemplate();
+//    }
+
 }

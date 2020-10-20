@@ -25,6 +25,7 @@ public class StockDaoImpl implements StockDao {
     @Override
     public List<Stock> getAllStock() {
         Session session = this.sessionFactory.getCurrentSession();
+        logger.info("getAllStock:: session.getTransaction().getStatus().name(): {}",session.getTransaction().getStatus().name());
         List<Stock> stocks = (List<Stock>) session.createQuery("from Stock ").list();
         return stocks;
     }
@@ -66,6 +67,16 @@ public class StockDaoImpl implements StockDao {
     @Override
     public Stock findById(long id) {
         Session session = this.sessionFactory.getCurrentSession();
+
         return session.get(Stock.class, id);
+    }
+
+    @Override
+    public void addAll(List<Stock> stockResponses) {
+        Session session = this.sessionFactory.getCurrentSession();
+        //session.beginTransaction();
+        logger.info("addAll:: session.getTransaction().getStatus().name(): {}",session.getTransaction().getStatus().name());
+        stockResponses.forEach(session::save);
+        //session.getTransaction().commit();
     }
 }

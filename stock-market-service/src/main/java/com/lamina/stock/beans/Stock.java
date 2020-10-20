@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "TBL_STOCK")
 public class Stock {
+    public Stock() {}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

@@ -2,7 +2,6 @@ package com.lamina.stock.service;
 
 import com.lamina.stock.beans.Stock;
 import com.lamina.stock.dao.StockDao;
-import com.lamina.stock.dao.StockDaoImpl;
 import com.lamina.stock.request.StockResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +22,7 @@ public class StockService {
     @Qualifier("getStockDaoImpl")
     @Autowired
     private StockDao stockDao;
+
 
     private static StockResponse stockCalculate(Stock stock) {
 
@@ -72,5 +72,17 @@ public class StockService {
 
     public StockResponse findById(long id) {
         return stockCalculate(stockDao.findById(id));
+    }
+
+
+    public List<StockResponse> addAll(List<StockResponse> stockResponses) {
+        List<Stock> stocks = stockResponses.stream().map(stockResponse -> {
+            Stock stock = new Stock();
+            BeanUtils.copyProperties(stockResponse,stock);
+            return stock;
+        }).collect(Collectors.toList());
+
+        stockDao.addAll(stocks);
+        return getAll().stream().map(StockService::stockCalculate).collect(Collectors.toList());
     }
 }
