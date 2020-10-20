@@ -14,3 +14,8 @@ api-gateway-service/.idea/misc.xml
 api-gateway-service/api-gateway-service.iml
 auth-service/.idea/**/**
 api-gateway-service/target/**/**
+leaves-service/.mvn/wrapper/maven-wrapper.jar
+leaves-service/.mvn/wrapper/maven-wrapper.jar
+leaves-service/.mvn/wrapper/maven-wrapper.properties
+*.log
+stock-market-service.log

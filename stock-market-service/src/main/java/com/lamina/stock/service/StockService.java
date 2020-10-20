@@ -20,10 +20,6 @@ import java.util.stream.Collectors;
 public class StockService {
     static final Logger logger = LoggerFactory.getLogger(StockService.class);
 
-//    @Autowired
-//    private StockRepository repository;
-
-
     @Qualifier("getStockDaoImpl")
     @Autowired
     private StockDao stockDao;
@@ -59,7 +55,7 @@ public class StockService {
     }
     public List<StockResponse> findAll() {
 
-        List<Stock> stocks = null;//repository.findAll();
+        List<Stock> stocks = stockDao.getAllStock();
 
         return stocks.stream()
                 .filter(o -> o.getActive() == 0)
@@ -68,9 +64,9 @@ public class StockService {
 
     public List<StockResponse> findByUserId(long userId) {
 
-        return null;/*repository.findByUserId(userId)
+        return stockDao.findByUserId(userId)
                 .stream()
                 .map(StockService::stockCalculate)
-                .collect(Collectors.toList());*/
+                .collect(Collectors.toList());
     }
 }

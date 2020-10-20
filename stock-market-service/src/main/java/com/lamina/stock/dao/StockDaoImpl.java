@@ -1,9 +1,11 @@
 package com.lamina.stock.dao;
 
 import com.lamina.stock.beans.Stock;
-import com.lamina.stock.request.StockResponse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Repository
 public class StockDaoImpl implements StockDao {
+    static final Logger logger = LoggerFactory.getLogger(StockDaoImpl.class);
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -49,5 +52,14 @@ public class StockDaoImpl implements StockDao {
     @Override
     public void deleteStock(Stock stock) {
 
+    }
+
+    @Override
+    public List<Stock> findByUserId(long userId) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Query<Stock> query = session.createQuery("from Stock where userId=:userId");
+        query.setParameter("userId", userId);
+
+        return query.list();
     }
 }

@@ -1,8 +1,8 @@
 package com.lamina.stock.dao;
 
 import com.lamina.stock.beans.Stock;
-import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.List;
 
 public interface StockDao {
@@ -12,4 +12,5 @@ public interface StockDao {
     public Stock addStock(Stock stock);
     public void updateStock(Stock stock);
     public void deleteStock(Stock stock);
+    List<Stock> findByUserId(long userId);
 }

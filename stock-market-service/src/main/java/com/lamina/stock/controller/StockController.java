@@ -24,17 +24,17 @@ public class StockController {
     @Autowired
     private StockService service;
 
-//    @GetMapping
-//    public ResponseEntity<List<StockResponse>> findAll() {
-//        return new ResponseEntity<List<StockResponse>>(service.findAll(), HttpStatus.OK);
-//    }
+    @GetMapping
+    public ResponseEntity<List<StockResponse>> findAll() {
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+    }
     @GetMapping("/all")
     public ResponseEntity<List<Stock>> getAll() {
-        return new ResponseEntity<List<Stock>>(service.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
-//
-//    @GetMapping("/{userId}")
-//    public ResponseEntity<List<StockResponse>> findByUserId(@PathVariable String userId) {
-//        return new ResponseEntity<List<StockResponse>>(service.findByUserId(Long.parseLong(userId)), HttpStatus.OK);
-//    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<StockResponse>> findByUserId(@PathVariable String userId) {
+        return new ResponseEntity<>(service.findByUserId(Long.parseLong(userId)), HttpStatus.OK);
+    }
 }
