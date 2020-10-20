@@ -28,12 +28,18 @@ public class StockController {
     public ResponseEntity<List<StockResponse>> findAll() {
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
+
     @GetMapping("/all")
     public ResponseEntity<List<Stock>> getAll() {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/{id}")
+    public ResponseEntity<StockResponse> findById(@PathVariable String id) {
+        return new ResponseEntity<>(service.findById(Long.parseLong(id)), HttpStatus.OK);
+    }
+
+    @GetMapping("/userid/{userId}")
     public ResponseEntity<List<StockResponse>> findByUserId(@PathVariable String userId) {
         return new ResponseEntity<>(service.findByUserId(Long.parseLong(userId)), HttpStatus.OK);
     }

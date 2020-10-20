@@ -1,6 +1,7 @@
 package com.lamina.stock.dao;
 
 import com.lamina.stock.beans.Stock;
+import com.lamina.stock.request.StockResponse;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,4 +14,6 @@ public interface StockDao {
     public void updateStock(Stock stock);
     public void deleteStock(Stock stock);
     List<Stock> findByUserId(long userId);
+
+    Stock findById(long id);
 }

@@ -69,4 +69,8 @@ public class StockService {
                 .map(StockService::stockCalculate)
                 .collect(Collectors.toList());
     }
+
+    public StockResponse findById(long id) {
+        return stockCalculate(stockDao.findById(id));
+    }
 }

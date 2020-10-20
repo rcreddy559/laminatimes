@@ -62,4 +62,10 @@ public class StockDaoImpl implements StockDao {
 
         return query.list();
     }
+
+    @Override
+    public Stock findById(long id) {
+        Session session = this.sessionFactory.getCurrentSession();
+        return session.get(Stock.class, id);
+    }
 }
