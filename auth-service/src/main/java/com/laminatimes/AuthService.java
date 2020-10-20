@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.laminatimes.util.JwtUtil;
 
 @EnableEurekaClient
-@SpringBootApplication(scanBasePackages={"com.laminatimes"} )
+@SpringBootApplication
 public class AuthService 
 {
 

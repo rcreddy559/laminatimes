@@ -1,0 +1,7 @@
+url:
+  holiday: http://HOLIDAYS-SERVICE
+  api-gateway: http://API-GATEWAY-SERVICE
+  auth: http://AUTH-SERVICE
+  config: http://CONFIG-SERVER-SERVICE
+  leave: http://LEAVES-SERVICE
+  user: http://USER-SERVICE

@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.laminatimes.entity.Role;
 
 public class LoginResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -15,7 +14,6 @@ public class LoginResponse implements Serializable {
 	private String errorCode;
 	private String description;
 	private String sessionKey;
-	private Role role;
 	private String email;
 	private String empId;
 	private String firstName;
@@ -32,14 +30,6 @@ public class LoginResponse implements Serializable {
 
 	public void setTimestamp(LocalDateTime timestamp) {
 		this.timestamp = timestamp;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
 	}
 
 	public String getPosition() {
@@ -114,10 +104,5 @@ public class LoginResponse implements Serializable {
 		this.sessionKey = sessionKey;
 	}
 
-	@Override
-	public String toString() {
-		return "LoginResponse [status=" + status + ", errorCode=" + errorCode + ", description=" + description
-				+ ", sessionKey=" + sessionKey + ", role=" + role + ", email=" + email + ", empId=" + empId
-				+ ", firstName=" + firstName + ", lastName=" + lastName + ", position=" + position + "]";
-	}
+
 }

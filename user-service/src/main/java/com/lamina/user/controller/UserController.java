@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 public class UserController {
 	Logger logger= LoggerFactory.getLogger(UserController.class);
 	
@@ -33,9 +33,9 @@ public class UserController {
 
 	@Value("${url.holiday}")
 	String holidayUrl;
-
-	@Autowired
-	private KafkaSender sender;
+//
+//	@Autowired
+//	private KafkaSender sender;
 
 	@PostMapping("/login")
 	public UserResponse login(@RequestBody UserResponse userResponse) {
@@ -55,10 +55,16 @@ public class UserController {
 		return service.getUsers();
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	public UserResponse get(@PathVariable int id) {
 		logger.info("Get User id:{}", id);
 		return service.get(id);
+	}
+
+	@GetMapping("/username/{userName}")
+	public UserResponse getByUserName(@PathVariable String userName) {
+		logger.info("Get User id:{}", userName);
+		return service.get(userName);
 	}
 	
 	@PostMapping
@@ -88,8 +94,8 @@ public class UserController {
 		logger.info("Rest template : Leave URL: {}", leaveUrl);
 		logger.info("Rest template : Holiday URL: {}", holidayUrl);
 
-		List<Leave> leaves = restTemplate.getForObject("http://3.236.229.114:31468/leave", List.class);
-		List<Holiday> holidays = restTemplate.getForObject("http://3.236.229.114:30643/holidays", List.class);
+		List<Leave> leaves = restTemplate.getForObject("http://LEAVES-SERVICE/leave", List.class);
+		List<Holiday> holidays = restTemplate.getForObject("http://HOLIDAYS-SERVICE/holidays", List.class);
 
 		return new UserTimesheet(service.get(id), leaves, holidays);
 	}

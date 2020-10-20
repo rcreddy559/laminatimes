@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 import static com.lamina.user.util.UserUtil.encodePassword;
 
-@Entity(name = "user")
+@Entity(name = "TBL_USER")
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = "userName")})
 public class User {
 
@@ -26,18 +26,19 @@ public class User {
 	private String password;
 	private int active;
 	private String gender;
+	private int role;
 
 	public User(){}
 
     public User(int id, String firstName, String lastName, LocalDate dateOfBirth, String address,
-				String phoneNumber, String email, String userName, String password, int active, String gender) {
-		this( firstName,  lastName,  dateOfBirth,  address, phoneNumber, email, userName, password, active, gender);
+				String phoneNumber, String email, String userName, String password, int active, String gender, int role) {
+		this( firstName,  lastName,  dateOfBirth,  address, phoneNumber, email, userName, password, active, gender, role);
 		this.id = id;
     }
 
     public User(String firstName, String lastName, LocalDate dateOfBirth,
 				String address, String phoneNumber, String email,
-				String userName, String password, int active, String gender) {
+				String userName, String password, int active, String gender, int role) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
@@ -48,7 +49,16 @@ public class User {
 		this.password = encodePassword(password);
 		this.active = active;
 		this.gender= gender;
+		this.role = role;
     }
+
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
 
 	public String getUserName() {
 		return userName;

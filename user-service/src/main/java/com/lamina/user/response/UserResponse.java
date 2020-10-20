@@ -17,19 +17,20 @@ public class UserResponse implements Serializable {
     private String password;
     private int active;
     private String gender;
+    private int role;
 
     public UserResponse() {}
 
     public UserResponse(int id, String firstName, String lastName, LocalDate dateOfBirth,
                         String address, String phoneNumber, String email, long salary,
-                        String userName, String password, int active, String gender) {
-        this(firstName, lastName, dateOfBirth, address, phoneNumber, email, salary, userName, password, active, gender);
+                        String userName, String password, int active, String gender, int role) {
+        this(firstName, lastName, dateOfBirth, address, phoneNumber, email, salary, userName, password, active, gender, role);
         this.id = id;
     }
 
     public UserResponse(String firstName, String lastName, LocalDate dateOfBirth,
                         String address, String phoneNumber, String email, long salary,
-                        String userName, String password, int active, String gender) {
+                        String userName, String password, int active, String gender, int role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -41,6 +42,15 @@ public class UserResponse implements Serializable {
         this.password = password;
         this.active = active;
         this.gender = gender;
+        this.role = role;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     public long getSalary() {
