@@ -45,7 +45,7 @@ db:
 # Hibernate
 hibernate:
   dialect: org.hibernate.dialect.MySQL5Dialect
-  show_sql: true
+  show_sql: false
   hbm2ddl:
     auto: update
 entitymanager:

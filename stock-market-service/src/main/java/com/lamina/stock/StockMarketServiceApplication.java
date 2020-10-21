@@ -22,7 +22,7 @@ public class StockMarketServiceApplication {
 
     @Bean
     public StockDao getStockDaoImpl() {
-        StockDao dao =  new StockDaoImpl();
+        StockDao dao = new StockDaoImpl();
         return dao;
     }
 

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.HeaderParam;
 import java.util.List;
 
 @RestController
@@ -38,11 +39,19 @@ public class StockController {
 
     @GetMapping("/userid/{userId}")
     public ResponseEntity<List<StockResponse>> findByUserId(@PathVariable String userId) {
-        return new ResponseEntity<>(service.findByUserId(Long.parseLong(userId)), HttpStatus.OK);
+        return new ResponseEntity<>(service.getByUserId(Long.parseLong(userId)), HttpStatus.OK);
     }
 
     @PostMapping("/addAll")
     public ResponseEntity<List<StockResponse>> addAll(@RequestBody List<StockResponse> stockResponses) {
         return new ResponseEntity<>(service.addAll(stockResponses), HttpStatus.OK);
     }
+
+    @PostMapping
+    public ResponseEntity<StockResponse> add(@RequestBody StockResponse stockResponse) {
+        return new ResponseEntity<>(service.addStock(stockResponse), HttpStatus.OK);
+    }
+
+
+
 }

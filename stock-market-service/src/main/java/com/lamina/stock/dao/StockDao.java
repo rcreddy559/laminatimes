@@ -1,20 +1,23 @@
 package com.lamina.stock.dao;
 
 import com.lamina.stock.beans.Stock;
-import com.lamina.stock.request.StockResponse;
 
 import java.util.List;
 
 public interface StockDao {
-    public List<Stock> getAllStock();
-    public List<Stock> getAllStockByUserId(long userId);
-    public Stock getStock(long id);
-    public Stock addStock(Stock stock);
-    public void updateStock(Stock stock);
-    public void deleteStock(Stock stock);
-    List<Stock> findByUserId(long userId);
+    List<Stock> getAllStock();
 
-    Stock findById(long id);
+    List<Stock> getAllStockByUserId(long userId);
 
-    void addAll(List<Stock> stockResponses);
+    Stock getStock(long id);
+
+    Long addStock(Stock stock);
+
+    void updateStock(Stock stock);
+
+    void deleteStock(Stock stock);
+
+    List<Stock> getByUserId(long userId);
+
+    List<Long> addAll(List<Stock> stockResponses);
 }

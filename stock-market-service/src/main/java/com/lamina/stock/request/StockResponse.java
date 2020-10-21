@@ -1,5 +1,10 @@
 package com.lamina.stock.request;
 
+import com.lamina.stock.beans.Stock;
+import org.springframework.beans.BeanUtils;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 
 public class StockResponse {
@@ -19,6 +24,28 @@ public class StockResponse {
     private double overallPlPercentage;
     private double investment;
     private double currentValue;
+    public StockResponse(){}
+
+    public StockResponse(Stock stock) {
+        BeanUtils.copyProperties(stock, this);
+
+        double dayDiff = this.getCurrentPrice() - this.getLtp();
+        this.setDayPl(BigDecimal.valueOf(dayDiff).setScale(10, RoundingMode.HALF_UP).doubleValue());
+        this.setDayPlPercentage(BigDecimal.valueOf(dayDiff / this.getAvgPrice() * 100)
+                .setScale(2, RoundingMode.HALF_UP).doubleValue());
+
+        double investment = this.getAvgPrice() * this.getNetQty();
+        this.setInvestment(investment);
+
+        double overallPrice = this.getCurrentPrice() * this.getNetQty();
+        this.setCurrentValue(overallPrice);
+
+        double investmentDiff = overallPrice - investment;
+        BigDecimal bigDecimal = BigDecimal.valueOf(investmentDiff / investment * 100).setScale(2, RoundingMode.HALF_UP);
+
+        this.setOverallPl(investmentDiff);
+        this.setOverallPlPercentage(bigDecimal.doubleValue());
+    }
 
     public double getCurrentValue() {
         return currentValue;
