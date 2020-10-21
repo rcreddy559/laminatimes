@@ -1,7 +1,7 @@
 package com.lamina.stock.request;
 
 import com.lamina.stock.beans.Stock;
-import org.springframework.beans.BeanUtils;
+import static org.springframework.beans.BeanUtils.copyProperties;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -16,8 +16,8 @@ public class StockResponse {
     private LocalDateTime date;
     private long netQty;
     private double avgPrice;
-    private double ltp;
     private double currentPrice;
+    private double ltp;
     private double dayPl;
     private double dayPlPercentage;
     private double overallPl;
@@ -26,25 +26,38 @@ public class StockResponse {
     private double currentValue;
     public StockResponse(){}
 
+    public Stock createStock() {
+        Stock stock = new Stock();
+        copyProperties(this, stock);
+        return stock;
+    }
     public StockResponse(Stock stock) {
-        BeanUtils.copyProperties(stock, this);
+        copyProperties(stock, this);
+        calculatePl();
+        calculateInvestment();
+        calculateOverallPl();
+    }
 
+    private void calculateOverallPl() {
+        this.overallPl = BigDecimal.valueOf(this.currentValue)
+                .subtract(BigDecimal.valueOf(this.investment))
+                .doubleValue();
+        this.overallPlPercentage =
+                BigDecimal.valueOf(this.overallPl / this.investment * 100)
+                            .setScale(2, RoundingMode.HALF_UP)
+                            .doubleValue();
+    }
+
+    private void calculateInvestment() {
+        this.investment = this.avgPrice * this.netQty;
+        this.currentValue = this.currentPrice * this.netQty;
+    }
+
+    private void calculatePl() {
         double dayDiff = this.getCurrentPrice() - this.getLtp();
-        this.setDayPl(BigDecimal.valueOf(dayDiff).setScale(10, RoundingMode.HALF_UP).doubleValue());
-        this.setDayPlPercentage(BigDecimal.valueOf(dayDiff / this.getAvgPrice() * 100)
+        this.dayPl = (BigDecimal.valueOf(dayDiff).setScale(10, RoundingMode.HALF_UP).doubleValue());
+        this.dayPlPercentage = (BigDecimal.valueOf(dayDiff / this.getAvgPrice() * 100)
                 .setScale(2, RoundingMode.HALF_UP).doubleValue());
-
-        double investment = this.getAvgPrice() * this.getNetQty();
-        this.setInvestment(investment);
-
-        double overallPrice = this.getCurrentPrice() * this.getNetQty();
-        this.setCurrentValue(overallPrice);
-
-        double investmentDiff = overallPrice - investment;
-        BigDecimal bigDecimal = BigDecimal.valueOf(investmentDiff / investment * 100).setScale(2, RoundingMode.HALF_UP);
-
-        this.setOverallPl(investmentDiff);
-        this.setOverallPlPercentage(bigDecimal.doubleValue());
     }
 
     public double getCurrentValue() {
@@ -147,31 +160,16 @@ public class StockResponse {
         return dayPl;
     }
 
-    public void setDayPl(double dayPl) {
-        this.dayPl = dayPl;
-    }
-
     public double getDayPlPercentage() {
         return dayPlPercentage;
-    }
-
-    public void setDayPlPercentage(double dayPlPercentage) {
-        this.dayPlPercentage = dayPlPercentage;
     }
 
     public double getOverallPl() {
         return overallPl;
     }
 
-    public void setOverallPl(double overallPl) {
-        this.overallPl = overallPl;
-    }
-
     public double getOverallPlPercentage() {
         return overallPlPercentage;
     }
 
-    public void setOverallPlPercentage(double overallPlPercentage) {
-        this.overallPlPercentage = overallPlPercentage;
-    }
 }

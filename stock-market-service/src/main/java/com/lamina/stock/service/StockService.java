@@ -5,7 +5,6 @@ import com.lamina.stock.dao.StockDao;
 import com.lamina.stock.request.StockResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -26,10 +25,11 @@ public class StockService {
     }
 
     public List<StockResponse> findAll() {
-        List<StockResponse> collect = stockDao.getAllStock().stream()
+        return stockDao.getAllStock()
+                .stream()
                 .filter(o -> o.getActive() == 0)
-                .map(StockResponse::new).collect(Collectors.toList());
-        return collect;
+                .map(StockResponse::new)
+                .collect(Collectors.toList());
     }
 
     public List<StockResponse> getByUserId(Long userId) {
@@ -46,19 +46,14 @@ public class StockService {
 
 
     public List<StockResponse> addAll(List<StockResponse> stockResponses) {
-        List<Stock> stocks = stockResponses.stream().map(stockResponse -> {
-            Stock stock = new Stock();
-            BeanUtils.copyProperties(stockResponse, stock);
-            return stock;
-        }).collect(Collectors.toList());
-
+        List<Stock> stocks = stockResponses.stream()
+                                            .map(StockResponse::createStock)
+                                            .collect(Collectors.toList());
         stockDao.addAll(stocks);
         return getAll().stream().map(StockResponse::new).collect(Collectors.toList());
     }
 
     public StockResponse addStock(StockResponse stockResponse) {
-        Stock stock = new Stock();
-        BeanUtils.copyProperties(stockResponse, stock);
-        return findById(stockDao.addStock(stock));
+        return findById(stockDao.addStock(stockResponse.createStock()));
     }
 }
