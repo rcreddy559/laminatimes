@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,66 +21,44 @@ public class StockService {
     @Autowired
     private StockDao stockDao;
 
-
-    private static StockResponse stockCalculate(Stock stock) {
-
-        StockResponse stockResponse = new StockResponse();
-        BeanUtils.copyProperties(stock, stockResponse);
-
-        double dayDiff = stockResponse.getCurrentPrice() - stockResponse.getLtp();
-        stockResponse.setDayPl(BigDecimal.valueOf(dayDiff).setScale(10, RoundingMode.HALF_UP).doubleValue());
-        stockResponse.setDayPlPercentage(BigDecimal.valueOf(dayDiff / stockResponse.getAvgPrice() * 100)
-                     .setScale(2,RoundingMode.HALF_UP).doubleValue());
-
-        double investment = stockResponse.getAvgPrice() * stockResponse.getNetQty();
-        stockResponse.setInvestment(investment);
-
-        double overallPrice = stockResponse.getCurrentPrice() * stockResponse.getNetQty();
-        stockResponse.setCurrentValue(overallPrice);
-
-
-        double investmentDiff = overallPrice - investment;
-        BigDecimal bigDecimal = BigDecimal.valueOf(investmentDiff / investment * 100).setScale(2, RoundingMode.HALF_UP);
-
-        stockResponse.setOverallPl(investmentDiff);
-        stockResponse.setOverallPlPercentage(bigDecimal.doubleValue());
-
-        return stockResponse;
-    }
-
     public List<Stock> getAll() {
         return stockDao.getAllStock();
     }
+
     public List<StockResponse> findAll() {
-
-        List<Stock> stocks = stockDao.getAllStock();
-
-        return stocks.stream()
+        List<StockResponse> collect = stockDao.getAllStock().stream()
                 .filter(o -> o.getActive() == 0)
-                .map(StockService::stockCalculate).collect(Collectors.toList());
+                .map(StockResponse::new).collect(Collectors.toList());
+        return collect;
     }
 
-    public List<StockResponse> findByUserId(long userId) {
+    public List<StockResponse> getByUserId(Long userId) {
 
-        return stockDao.findByUserId(userId)
+        return stockDao.getByUserId(userId)
                 .stream()
-                .map(StockService::stockCalculate)
+                .map(StockResponse::new)
                 .collect(Collectors.toList());
     }
 
     public StockResponse findById(long id) {
-        return stockCalculate(stockDao.findById(id));
+        return new StockResponse(stockDao.getStock(id));
     }
 
 
     public List<StockResponse> addAll(List<StockResponse> stockResponses) {
         List<Stock> stocks = stockResponses.stream().map(stockResponse -> {
             Stock stock = new Stock();
-            BeanUtils.copyProperties(stockResponse,stock);
+            BeanUtils.copyProperties(stockResponse, stock);
             return stock;
         }).collect(Collectors.toList());
 
         stockDao.addAll(stocks);
-        return getAll().stream().map(StockService::stockCalculate).collect(Collectors.toList());
+        return getAll().stream().map(StockResponse::new).collect(Collectors.toList());
+    }
+
+    public StockResponse addStock(StockResponse stockResponse) {
+        Stock stock = new Stock();
+        BeanUtils.copyProperties(stockResponse, stock);
+        return findById(stockDao.addStock(stock));
     }
 }
