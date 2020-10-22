@@ -1,13 +1,15 @@
 package com.lamina.stock.request;
 
 import com.lamina.stock.beans.Stock;
+import org.springframework.hateoas.RepresentationModel;
+
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 
-public class StockResponse {
+public class StockResponse extends RepresentationModel<StockResponse> {
     private long id;
     private long userId;
     private int active;

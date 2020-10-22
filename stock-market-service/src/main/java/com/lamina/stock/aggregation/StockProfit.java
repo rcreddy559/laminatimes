@@ -6,3 +6,4 @@ public enum StockProfit {
     HIGH_LOOS,
     LOW_LOOS,
 }
+

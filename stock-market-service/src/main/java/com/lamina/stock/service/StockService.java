@@ -20,10 +20,6 @@ public class StockService {
     @Autowired
     private StockDao stockDao;
 
-    public List<Stock> getAll() {
-        return stockDao.getAllStock();
-    }
-
     public List<StockResponse> findAll() {
         return stockDao.getAllStock()
                 .stream()
@@ -50,7 +46,7 @@ public class StockService {
                                             .map(StockResponse::createStock)
                                             .collect(Collectors.toList());
         stockDao.addAll(stocks);
-        return getAll().stream().map(StockResponse::new).collect(Collectors.toList());
+        return findAll();
     }
 
     public StockResponse addStock(StockResponse stockResponse) {

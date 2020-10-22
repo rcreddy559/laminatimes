@@ -69,7 +69,6 @@ public class StockDaoImpl implements StockDao {
     public List<Long> addAll(List<Stock> stockResponses) {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        stockResponses.forEach(session::save);
         List<Long> ids = stockResponses.stream().map(stock -> (Long) session.save(stock)).collect(Collectors.toList());
         session.getTransaction().commit();
         return ids;

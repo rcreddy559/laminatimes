@@ -1,8 +1,8 @@
 package com.lamina.stock.controller;
 
-import com.lamina.stock.beans.Stock;
 import com.lamina.stock.request.StockResponse;
 import com.lamina.stock.service.StockService;
+import com.lamina.stock.util.StockUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,28 +26,38 @@ public class StockController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Stock>> getAll() {
-        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+    public ResponseEntity<List<StockResponse>> getAll() {
+        List<StockResponse> stock = service.findAll();
+        StockUtil.addLink (stock);
+        return new ResponseEntity<>(stock, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StockResponse> findById(@PathVariable String id) {
-        return new ResponseEntity<>(service.findById(Long.parseLong(id)), HttpStatus.OK);
+    public ResponseEntity<StockResponse> findById(@PathVariable Long id) {
+        StockResponse stock = service.findById (id);
+        StockUtil.addLink(stock);
+        return new ResponseEntity<>(stock, HttpStatus.OK);
     }
 
     @GetMapping("/userid/{userId}")
-    public ResponseEntity<List<StockResponse>> findByUserId(@PathVariable String userId) {
-        return new ResponseEntity<>(service.getByUserId(Long.parseLong(userId)), HttpStatus.OK);
+    public ResponseEntity<List<StockResponse>> findByUserId(@PathVariable Long userId) {
+        List<StockResponse> stock = service.getByUserId (userId);
+        StockUtil.addLink (stock);
+        return new ResponseEntity<>(stock, HttpStatus.OK);
     }
 
     @PostMapping("/addAll")
     public ResponseEntity<List<StockResponse>> addAll(@RequestBody List<StockResponse> stockResponses) {
-        return new ResponseEntity<>(service.addAll(stockResponses), HttpStatus.OK);
+        List<StockResponse> stock = service.addAll(stockResponses);
+        StockUtil.addLink (stock);
+        return new ResponseEntity<>( stock, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<StockResponse> add(@RequestBody StockResponse stockResponse) {
-        return new ResponseEntity<>(service.addStock(stockResponse), HttpStatus.OK);
+        StockResponse stock = service.addStock(stockResponse);
+        StockUtil.addLink(stock);
+        return new ResponseEntity<>(stock, HttpStatus.OK);
     }
 
 
