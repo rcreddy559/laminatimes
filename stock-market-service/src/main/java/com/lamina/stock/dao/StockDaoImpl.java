@@ -3,18 +3,26 @@ package com.lamina.stock.dao;
 import com.lamina.stock.beans.Stock;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.StatelessSession;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.NamedNativeQuery;
+import org.hibernate.jdbc.Work;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
+
 public class StockDaoImpl implements StockDao {
     static final Logger logger = LoggerFactory.getLogger(StockDaoImpl.class);
 
@@ -73,6 +81,7 @@ public class StockDaoImpl implements StockDao {
 
         int count =1;
         List<Long> ids = new ArrayList<>(stockResponses.size());
+
         for (Stock s : stockResponses) {
             ids.add((Long)session.save(s));
 
@@ -101,4 +110,21 @@ public class StockDaoImpl implements StockDao {
         session.getTransaction().commit();
         return ids;
     }
+
+    @Override
+    public BigInteger getUnCommitted() {
+        try (Session session = sessionFactory.openSession()) {
+            session.doWork(new Work() {
+                @Override
+                public void execute(Connection connection) throws SQLException {
+                    connection.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
+
+                }
+            });
+            return (BigInteger) session.createNativeQuery("select count(*) from TBL_STOCK ").getSingleResult();
+        } catch (Exception e) {e.printStackTrace();}
+        return BigInteger.ZERO;
+    }
+
+
 }

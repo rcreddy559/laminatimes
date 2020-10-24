@@ -8,11 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@EnableTransactionManagement
 public class StockService {
     static final Logger logger = LoggerFactory.getLogger(StockService.class);
 
@@ -51,5 +56,10 @@ public class StockService {
 
     public StockResponse addStock(StockResponse stockResponse) {
         return findById(stockDao.addStock(stockResponse.createStock()));
+    }
+
+    public BigInteger getUnCommitted() {
+        logger.info("--------getUnCommitted---------");
+        return stockDao.getUnCommitted();
     }
 }

@@ -2,6 +2,7 @@ package com.lamina.stock.dao;
 
 import com.lamina.stock.beans.Stock;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public interface StockDao {
@@ -20,4 +21,6 @@ public interface StockDao {
     List<Stock> getByUserId(long userId);
 
     List<Long> addAll(List<Stock> stockResponses);
+
+    BigInteger getUnCommitted();
 }
