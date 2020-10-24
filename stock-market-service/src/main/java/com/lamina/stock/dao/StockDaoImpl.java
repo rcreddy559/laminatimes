@@ -79,7 +79,7 @@ public class StockDaoImpl implements StockDao {
             if (count % 50 == 0) {
                 session.flush();
                 session.clear();
-                count = 1;
+                count += 1;
             }
             count++;
         }
