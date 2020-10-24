@@ -3,7 +3,7 @@ package com.lamina.stock.beans;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity("STOCK")
 @Table(name = "TBL_STOCK")
 public class Stock {
     public Stock() {
