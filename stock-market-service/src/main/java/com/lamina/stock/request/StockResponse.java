@@ -174,4 +174,25 @@ public class StockResponse extends RepresentationModel<StockResponse> {
         return overallPlPercentage;
     }
 
+    @Override
+    public String toString() {
+        return "Stock{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", active=" + active +
+                ", name='" + name + '\'' +
+                ", symbol='" + symbol + '\'' +
+                ", date=" + date +
+                ", netQty=" + netQty +
+                ", avgPrice=" + avgPrice +
+                ", currentPrice=" + currentPrice +
+                ", ltp=" + ltp +
+                ", dayPl=" + dayPl +
+                ", dayPlPercentage=" + dayPlPercentage +
+                ", overallPl=" + overallPl +
+                ", overallPlPercentage=" + overallPlPercentage +
+                ", investment=" + investment +
+                ", currentValue=" + currentValue +
+                '}';
+    }
 }

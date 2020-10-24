@@ -22,7 +22,11 @@ public class StockController {
 
     @GetMapping
     public ResponseEntity<List<StockResponse>> findAll() {
-        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+        logger.info("find all");
+        List<StockResponse> stock = service.findAll();
+        StockUtil.addLink(stock);
+        logger.info("Stock size :{}", stock.size());
+        return new ResponseEntity<>(stock, HttpStatus.OK);
     }
 
     @GetMapping("/all")

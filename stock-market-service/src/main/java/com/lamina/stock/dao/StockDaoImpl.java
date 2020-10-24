@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,7 +70,34 @@ public class StockDaoImpl implements StockDao {
     public List<Long> addAll(List<Stock> stockResponses) {
         Session session = this.sessionFactory.getCurrentSession();
         session.beginTransaction();
-        List<Long> ids = stockResponses.stream().map(stock -> (Long) session.save(stock)).collect(Collectors.toList());
+
+        int count =1;
+        List<Long> ids = new ArrayList<>(stockResponses.size());
+        for (Stock s : stockResponses) {
+            ids.add((Long)session.save(s));
+
+            if (count % 50 == 0) {
+                session.flush();
+                session.clear();
+                count = 1;
+            }
+            count++;
+        }
+
+
+
+//        List<Long> ids = stockResponses.stream().map(stock -> {
+//
+//            Long id = (Long) session.save(stock);
+//            if(count % 50 == 0) {
+//                session.flush();
+//                session.clear();
+//            }
+//            count++;
+//            return id;
+//        }).collect(Collectors.toList());
+
+
         session.getTransaction().commit();
         return ids;
     }
