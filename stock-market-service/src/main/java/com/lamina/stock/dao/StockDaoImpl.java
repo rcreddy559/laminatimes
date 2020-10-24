@@ -121,7 +121,8 @@ public class StockDaoImpl implements StockDao {
 
                 }
             });
-            return (BigInteger) session.createNativeQuery("select count(*) from TBL_STOCK ").getSingleResult();
+            final String query = "select count(*) from TBL_STOCK ";
+            return (BigInteger) session.createNativeQuery(query).getSingleResult();
         } catch (Exception e) {e.printStackTrace();}
         return BigInteger.ZERO;
     }
