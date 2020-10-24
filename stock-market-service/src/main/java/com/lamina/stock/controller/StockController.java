@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -64,6 +66,10 @@ public class StockController {
         return new ResponseEntity<>(stock, HttpStatus.OK);
     }
 
-
+    @GetMapping("/uncommitted")
+    public ResponseEntity<BigInteger> getUnCommitted() {
+        BigInteger stocks = service.getUnCommitted();
+    return new ResponseEntity<>(stocks, HttpStatus.OK);
+    }
 
 }

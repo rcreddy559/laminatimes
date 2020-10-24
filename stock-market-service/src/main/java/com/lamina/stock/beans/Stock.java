@@ -3,8 +3,9 @@ package com.lamina.stock.beans;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity("STOCK")
+@Entity
 @Table(name = "TBL_STOCK")
+//@org.hibernate.annotations.NamedNativeQuery(name="count_stocks",query="select count(*) from TBL_STOCK", resultClass=Integer.class)
 public class Stock {
     public Stock() {
     }
