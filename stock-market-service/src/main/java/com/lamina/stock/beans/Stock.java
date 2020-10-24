@@ -9,6 +9,7 @@ public class Stock {
     public Stock() {
     }
 //checkinigf
+  //second comment
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
