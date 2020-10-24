@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class Stock {
     public Stock() {
     }
-
+//checkinigf
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
