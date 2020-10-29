@@ -67,8 +67,8 @@ public class StockController {
     }
 
     @GetMapping("/uncommitted")
-    public ResponseEntity<BigInteger> getUnCommitted() {
-        BigInteger stocks = service.getUnCommitted();
+    public ResponseEntity<Integer> getUnCommitted() {
+        Integer stocks = service.getUnCommitted();
     return new ResponseEntity<>(stocks, HttpStatus.OK);
     }
 

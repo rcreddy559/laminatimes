@@ -10,19 +10,18 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
-@Component
 public class InitializeData {
 
-    @Value("${spring.datasource.data: data.sql}")
-    private String DATA_SOURCE;
-
-    @Autowired
-    private DataSource dataSource;
-
-    @EventListener(ApplicationReadyEvent.class)
-    public void loadData() {
-        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(
-                false, false, "UTF-8", new ClassPathResource(DATA_SOURCE));
-        resourceDatabasePopulator.execute(dataSource);
-    }
+//    @Value("${spring.datasource.data: data.sql}")
+//    private String DATA_SOURCE;
+//
+//    @Autowired
+//    private DataSource dataSource;
+//
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void loadData() {
+//        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(
+//                false, false, "UTF-8", new ClassPathResource(DATA_SOURCE));
+//        resourceDatabasePopulator.execute(dataSource);
+//    }
 }

@@ -19,4 +19,5 @@ leaves-service/.mvn/wrapper/maven-wrapper.jar
 leaves-service/.mvn/wrapper/maven-wrapper.properties
 *.log
 stock-market-service.log
-user-service/target/classes/META-INF/maven/com.lamina.user/user-service/pom.properties
+user-service/target/**/**
+user-service/*.log

@@ -3,8 +3,10 @@ logging:
     name: ../stock-market-service.log
   level:
     com: DEBUG
+
 server:
   port: 8092
+
 spring:
   datasource:
     data: data.sql
@@ -13,43 +15,17 @@ spring:
     name: stock-market-service
   cloud:
     config:
+      uri: http://CONFIG-SERVER
       server:
         git:
           uri: https://github.com/ravichandrap/laminatimes
-      uri: http://CONFIG-SERVER
   profiles:
     active: prod
-#  datasource:
-#    url: jdbc:h2:mem:test
-#    driverClassName: org.h2.Driver
-#    username: sa
-#    password: password
-#  jpa:
-#    database-platform: org.hibernate.dialect.H2Dialect
-#    hibernate:
-#      ddl-auto: update
-#    properties:
-#      hibernate:
-#        enable_lazy_load_no_trans: true
-#  h2:
-#    console:
-#      enabled: true
 
-# Database
-db:
-  driver: com.mysql.cj.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/lamina
-  username: admin
-  password: password#123
+url:
+  holiday: http://localhost:31082/holidays
+  leave: http://localhost:31082/leave
 
-# Hibernate
-hibernate:
-  dialect: org.hibernate.dialect.MySQL5Dialect
-  show_sql: false
-  hbm2ddl:
-    auto: update
-entitymanager:
-  packagesToScan: com.lamina.stock
+debug: false
 
 
-#spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true
