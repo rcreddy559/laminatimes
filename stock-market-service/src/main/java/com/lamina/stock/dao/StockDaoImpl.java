@@ -37,11 +37,6 @@ public class StockDaoImpl implements StockDao {
     }
 
     @Override
-    public List<Stock> getAllStockByUserId(long userId) {
-        return null;
-    }
-
-    @Override
     public Long addStock(Stock stock) {
         Session session = this.sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
@@ -63,9 +58,8 @@ public class StockDaoImpl implements StockDao {
     @Override
     public List<Stock> getByUserId(long userId) {
         Session session = this.sessionFactory.getCurrentSession();
-        Query<Stock> query = session.createQuery("from Stock where userId=:userId");
+        Query query = session.createQuery("from Stock where userId=:userId");
         query.setParameter("userId", userId);
-
         return query.list();
     }
 

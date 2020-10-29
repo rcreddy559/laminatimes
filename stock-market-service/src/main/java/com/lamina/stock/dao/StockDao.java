@@ -8,8 +8,6 @@ import java.util.List;
 public interface StockDao {
     List<Stock> getAllStock();
 
-    List<Stock> getAllStockByUserId(long userId);
-
     Stock getStock(long id);
 
     Long addStock(Stock stock);
