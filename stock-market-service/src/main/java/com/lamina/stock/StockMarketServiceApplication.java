@@ -20,11 +20,11 @@ public class StockMarketServiceApplication {
 //        return new LocalSessionFactoryBean();
 //    }
 
-    @Bean
-    public StockDao getStockDaoImpl() {
-        StockDao dao = new StockDaoImpl();
-        return dao;
-    }
+//    @Bean
+//    public StockDao getStockDaoImpl() {
+//        StockDao dao = new StockDaoImpl();
+//        return dao;
+//    }
 
 
 //    @Bean

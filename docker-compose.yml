@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  databases:
+    image: mysql
+    ports:
+    - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=lamina
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    ports:
+    - "8123:8123"
+  stock-market-service:
+    build:
+      context: ./stock-market-service
+      dockerfile: Dockerfile
+    ports:
+    - "8092:8092"
