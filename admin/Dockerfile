@@ -1,5 +1,11 @@
-FROM openjdk:12-jdk-alpine
+FROM adoptopenjdk
+#MAINTAINER experto.dev <experto.dev>
+#RUN addgroup -S spring && adduser -S spring -G spring
+#USER spring:spring
 
-ADD target/admin.jar admin.jar
-ENTRYPOINT ["java", "-jar", "/admin.jar"]
-EXPOSE 8084
+VOLUME /var/lib/user-service
+EXPOSE 8123
+ARG APP_NAME_JAR=/home/spring/user-service.jar
+ARG JAR_FILE=target/*.jar
+ADD ${JAR_FILE} ${APP_NAME_JAR}
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/home/spring/user-service.jar"]

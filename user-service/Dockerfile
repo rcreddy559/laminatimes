@@ -1,7 +1,7 @@
 FROM adoptopenjdk
 #MAINTAINER experto.dev <experto.dev>
-RUN addgroup -S spring && adduser -S spring -G spring
-USER spring:spring
+#RUN addgroup -S spring && adduser -S spring -G spring
+#USER spring:spring
 
 VOLUME /var/lib/user-service
 EXPOSE 8123

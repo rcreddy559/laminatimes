@@ -1,16 +1,11 @@
-FROM openjdk:12-jdk-alpine
+FROM adoptopenjdk
+#MAINTAINER experto.dev <experto.dev>
+#RUN addgroup -S spring && adduser -S spring -G spring
+#USER spring:spring
 
-
-# Required for starting application up.
-RUN apk update && apk add /bin/sh
-
-RUN mkdir -p /opt/app
-ENV PROJECT_HOME /opt/app
-
-COPY  target/holidays-service-0.0.1-SNAPSHOT.jar  $PROJECT_HOME/holidays-service.jar
-
-WORKDIR $PROJECT_HOME
-
-CMD ["java" ,"-jar","./holidays-service.jar"]
-
+VOLUME /var/lib/holidays-service
 EXPOSE 8088
+ARG APP_NAME_JAR=/home/spring/holidays-service.jar
+ARG JAR_FILE=target/*.jar
+ADD ${JAR_FILE} ${APP_NAME_JAR}
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/home/spring/holidays-service.jar"]

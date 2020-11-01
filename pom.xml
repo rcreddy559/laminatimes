@@ -14,7 +14,7 @@
 		<module>leaves-service</module>
 		<module>holidays-service</module>
 		<module>projects-service</module>
-		<module>timesheet-service</module>
+<!--		<module>timesheet-service</module>-->
 		<module>user-service</module>
 		<module>auth-service</module>
   </modules>

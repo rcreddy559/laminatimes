@@ -21,14 +21,8 @@ logging:
     name: user-service.log
 
 url:
-  holiday: http://3.236.229.114:31082/holidays
-  leave: http://3.236.229.114:31082/leave
-
-kafka:
-  boot:
-    server: localhost:9092
-  topic:
-    name: myTopic-kafkasender
+  holiday: http://localhost:8088/holidays
+  leave: http://localhost:8086/leave
 
 debug: false
 

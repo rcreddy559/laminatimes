@@ -26,16 +26,3 @@ url:
   config: http://CONFIG-SERVER-SERVICE
   leave: http://LEAVES-SERVICE
   user: http://USER-SERVICE
-
-
-
-
-
-kafka:
-  boot:
-    server: localhost:9092
-  topic:
-    name: lamina-topic
-  consumer:
-    group:
-      id: lamina-group-id

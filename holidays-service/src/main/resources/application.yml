@@ -14,12 +14,3 @@ spring:
 logging:
   file:
     name: holidays-service.log
-
-kafka:
-  boot:
-    server: localhost:9092
-  topic:
-    name: myTopic-kafkasender
-  consumer:
-    group:
-      id: lamina-group-id

@@ -1,16 +1,11 @@
-FROM openjdk:12-jdk-alpine
+FROM adoptopenjdk
+#MAINTAINER experto.dev <experto.dev>
+#RUN addgroup -S spring && adduser -S spring -G spring
+#USER spring:spring
 
-
-# Required for starting application up.
-RUN apk update && apk add /bin/sh
-
-RUN mkdir -p /opt/app
-ENV PROJECT_HOME /opt/app
-
-COPY  target/api-gateway-service-0.0.1-SNAPSHOT.jar  $PROJECT_HOME/api-gateway-service.jar
-
-WORKDIR $PROJECT_HOME
-
-CMD ["java" ,"-jar","./api-gateway-service.jar"]
-
+VOLUME /var/lib/api-gateway-service
 EXPOSE 8085
+ARG APP_NAME_JAR=/home/spring/api-gateway-service.jar
+ARG JAR_FILE=target/*.jar
+ADD ${JAR_FILE} ${APP_NAME_JAR}
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/home/spring/api-gateway-service.jar"]

@@ -1,23 +1,111 @@
 version: "3.8"
 services:
+  stock-market-service:
+    container_name: stock-market-service
+    build:
+      context: ./stock-market-service
+      dockerfile: Dockerfile
+    ports:
+      - "8092:8092"
+    networks:
+      - backend
+    volumes:
+    - ./stock:/app
+
+  user-service:
+    container_name: user-service
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    ports:
+      - "8123:8123"
+    networks:
+      - backend
+    volumes:
+    - ./user:/app
+
+  config-server-service:
+    container_name: config-server-service
+    build:
+      context: ./config-server-service
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    networks:
+      - backend
+    volumes:
+    - ./config:/app
+
+  discovery-service:
+    container_name: discovery-service
+    build:
+      context: ./discovery-service
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - backend
+    volumes:
+    - ./discovery:/app
+
+  leaves-service:
+    container_name: leaves-service
+    build:
+      context: ./leaves-service
+      dockerfile: Dockerfile
+    ports:
+    - "8086:8086"
+    networks:
+      - backend
+    volumes:
+    - ./leaves:/app
+
+  holidays-service:
+    container_name: holidays-service
+    build:
+      context: ./holidays-service
+      dockerfile: Dockerfile
+    ports:
+    - "8088:8088"
+    networks:
+      - backend
+    volumes:
+    - ./holidays:/app
+
   databases:
     image: mysql
     ports:
     - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
-      - MYSQL_DATABASE=lamina
-  user-service:
+    - MYSQL_ROOT_PASSWORD=password
+    - MYSQL_USER=user
+    - MYSQL_PASSWORD=password
+    - MYSQL_DATABASE=lamina
+
+  auth-service:
+    container_name: auth-service
     build:
-      context: ./user-service
+      context: ./auth-service
       dockerfile: Dockerfile
     ports:
-    - "8123:8123"
-  stock-market-service:
+      - "8084:8084"
+    networks:
+     - backend
+    volumes:
+     - ./auth:/app
+
+  api-gateway-service:
+    container_name: api-gateway-service
     build:
-      context: ./stock-market-service
+      context: ./api-gateway-service
       dockerfile: Dockerfile
     ports:
-    - "8092:8092"
+      - "8085:8085"
+    networks:
+      - backend
+    volumes:
+      - ./api:/app
+
+networks:
+  frontend:
+  backend:
