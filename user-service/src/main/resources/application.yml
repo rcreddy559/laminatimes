@@ -23,6 +23,7 @@ logging:
 url:
   holiday: http://localhost:8088/holidays
   leave: http://localhost:8086/leave
+  stock: http://localhost:8092/api/v1/stock
 
 debug: false
 
