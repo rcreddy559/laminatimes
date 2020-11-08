@@ -47,6 +47,7 @@ public class StockService {
     }
 
     public StockResponse addStock(StockResponse stockResponse) {
+        List<Stock> all = repository.findAll();
         Stock save = repository.save(stockResponse.createStock());
         return new StockResponse(save);
     }

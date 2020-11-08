@@ -1,24 +1,29 @@
 logging:
-  file:
-    name: ../stock-market-service.log
+#  file:
+#    name: ../stock-market-service.log
   level:
     com: DEBUG
 
 server:
   port: 8092
 
+
 spring:
-  datasource:
-    data: data.sql
-    initialization-mode: always
-  application:
-    name: stock-market-service
   cloud:
     config:
       uri: http://CONFIG-SERVER
-      server:
-        git:
-          uri: https://github.com/ravichandrap/laminatimes
+  datasource:
+    url: jdbc:h2:mem:test
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
   profiles:
     active: prod
 

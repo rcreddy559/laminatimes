@@ -33,6 +33,7 @@ public class HttpService {
         return response.body();
     }
 
+
     public URI getUri(String userName) {
         return URI.create("http://localhost:8123/user/username/"+userName);
     }

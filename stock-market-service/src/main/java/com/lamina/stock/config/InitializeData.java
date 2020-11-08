@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 public class InitializeData {
 
-//    @Value("${spring.datasource.data: data.sql}")
+//    @Value("${spring.datasource.data: data22.sql}")
 //    private String DATA_SOURCE;
 //
 //    @Autowired

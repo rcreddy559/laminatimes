@@ -9,7 +9,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 
-public class StockResponse extends RepresentationModel<StockResponse> {
+public class StockResponse //extends RepresentationModel<StockResponse> {
+{
     private long id;
     private long userId;
     private int active;
